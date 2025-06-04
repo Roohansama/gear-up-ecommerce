@@ -50,7 +50,7 @@ class AuthController extends Controller
         }
 
         flash()->success("Logged in successfully");
-        return redirect()->to('/');
+        return redirect()->to('/dashboard');
     }
 
     public function register(Request $request){

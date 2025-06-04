@@ -1,5 +1,5 @@
 <!-- Sidebar: scrolls independently -->
-<aside class="w-64 border-r overflow-y-auto select-none scrollbar-hide hidden md:block bg-white shadow">
+<aside class="min-w-64 border-r overflow-y-auto select-none scrollbar-hide hidden md:block bg-white shadow">
     <div class="p-6">
         <!-- Admin User -->
         <div class="flex items-center space-x-4 text-lg text-text mb-8 mt-4 px-2">
@@ -39,7 +39,7 @@
                 </span>
                 <span>Add Product</span>
             </a>
-            <a href="#" class="flex items-center space-x-4 group text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">
+            <a href="{{route('category.index')}}" class="flex items-center space-x-4 group text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">
                 <span class="text-accent group-hover:opacity-100 opacity-70">
                     🗂️
                 </span>
