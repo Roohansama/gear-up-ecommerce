@@ -15,7 +15,7 @@ class AuthController extends Controller
         ]);
 
         if($response->failed()){
-            flash()->error($response->json());
+            flash()->error($response->json('message'));
             return back();
         }
 
@@ -32,7 +32,7 @@ class AuthController extends Controller
         ]);
 
         if($response->failed()){
-            flash()->error($response->json());
+            flash()->error($response->json('message'));
             return back();
         }
 
@@ -61,7 +61,7 @@ class AuthController extends Controller
         ]);
 
         if($response->failed()){
-            flash()->error($response->json());
+            flash()->error($response->json('message'));
             return back();
         }
 

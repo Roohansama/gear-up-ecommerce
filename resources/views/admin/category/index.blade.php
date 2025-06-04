@@ -4,15 +4,6 @@
     <div class="w-full mx-50 mt-10 p-6 bg-white rounded shadow">
 
         <h1 class="text-2xl font-bold mb-6">Categories</h1>
-
-        <div id="category-list" class="space-y-3 mb-6">
-            @foreach ($categories as $category)
-                <div class="p-3 border rounded text-gray-700 bg-gray-50">
-                    {{ $category->name }}
-                </div>
-            @endforeach
-        </div>
-
         <button id="add-category-row"
                 class="mb-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
             + Add Category
@@ -20,6 +11,29 @@
 
         <!-- Placeholder for new input row -->
         <div id="new-category-row"></div>
+
+        <div class="space-y-3 mb-6">
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                </tr>
+                @foreach ($categories as $category)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            <div id="category-list">
+                                <div class="p-3 text-gray-700">
+                                    {{ $category->name }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
 
     </div>
 
@@ -60,7 +74,7 @@
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
-                        body: JSON.stringify({ name })
+                        body: JSON.stringify({name})
                     })
                         .then(res => res.json())
                         .then(data => {
