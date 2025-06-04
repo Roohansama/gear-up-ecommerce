@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -25,6 +26,11 @@ Route::get('/', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard')->middleware('auth:web');
 
-Route::get('/tailwind', function () {
-    return view('tailwindtest');
+Route::group(['middleware' => 'auth:web'], function () {
+    route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/product/add', [ProductController::class, 'showProductForm'])->name('product.add');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
 });
