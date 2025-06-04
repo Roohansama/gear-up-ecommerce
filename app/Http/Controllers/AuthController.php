@@ -15,11 +15,13 @@ class AuthController extends Controller
         ]);
 
         if($response->failed()){
-            return back()->withErrors($response->json());
+            flash()->error($response->json());
+            return back();
         }
 
         session()->flush();
 
+        flash()->success('Logged out');
         return redirect()->to('/login');
 
     }
@@ -30,7 +32,8 @@ class AuthController extends Controller
         ]);
 
         if($response->failed()){
-            return back()->withErrors($response->json());
+            flash()->error($response->json());
+            return back();
         }
 
         $token = $response->json()['token'];
@@ -46,7 +49,25 @@ class AuthController extends Controller
             Auth::login($user); // this sets Laravel session
         }
 
+        flash()->success("Logged in successfully");
         return redirect()->to('/');
+    }
+
+    public function register(Request $request){
+        $response = Http::post('127.0.0.1:8001/api/register', [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        if($response->failed()){
+            flash()->error($response->json());
+            return back();
+        }
+
+        flash()->success('Account created successfully! Please login to continue.');
+        return redirect()->to('/login');
+
     }
 
 }
