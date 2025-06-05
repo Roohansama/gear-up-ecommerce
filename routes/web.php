@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     });
 
     //product routes
+    Route::get('products', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/add', [ProductController::class, 'showProductForm'])->name('product.add');
     Route::post('/product/store', [ProductController::class, 'storeProduct'])->name('product.store');
 

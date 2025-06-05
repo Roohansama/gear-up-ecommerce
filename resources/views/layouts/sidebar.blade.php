@@ -27,7 +27,7 @@
 
             <!-- Products -->
             <div class="mt-4 mb-1 px-3 text-xs text-gray-400 uppercase">Products</div>
-            <a href="#" class="flex items-center space-x-4 group text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">
+            <a href="{{route('product.index')}}" class="flex items-center space-x-4 group text-gray-700 hover:bg-gray-100 rounded-md px-3 py-2">
                 <span class="text-accent group-hover:opacity-100 opacity-70">
                     📦
                 </span>

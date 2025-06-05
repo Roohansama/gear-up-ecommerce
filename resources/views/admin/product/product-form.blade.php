@@ -37,6 +37,20 @@
                        required>
             </div>
 
+            <!-- Sale Price -->
+            <div>
+                <label class="block font-medium mb-1">Sale Price ($)</label>
+                <input type="number" name="sale_price" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm"
+                       required>
+            </div>
+
+            <!-- Sku -->
+            <div>
+                <label class="block font-medium mb-1">Sku</label>
+                <input type="text" name="sku" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm"
+                       required>
+            </div>
+
             <!-- Stock -->
             <div>
                 <label class="block font-medium mb-1">Stock</label>
@@ -48,11 +62,11 @@
                 <label class="block font-medium mb-1">Category</label>
                 <select name="category_id" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     <option value="">Select Category</option>
-{{--                    @if(isset($categories))--}}
+                    @if(isset($categories))
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-{{--                    @endif--}}
+                    @endif
                 </select>
             </div>
 

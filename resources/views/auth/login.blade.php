@@ -34,6 +34,7 @@
 {{--                    <span class="text-sm text-gray-600">Remember me</span>--}}
 {{--                </label>--}}
                 <a href="#" class="text-sm text-accent-600 hover:underline">Forgot password?</a>
+                <a href="{{route('register')}}" class="text-sm text-accent-600 hover:underline">Create an Account</a>
             </div>
 
             <!-- Submit -->
