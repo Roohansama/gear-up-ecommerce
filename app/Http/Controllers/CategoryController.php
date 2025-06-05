@@ -16,22 +16,31 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+
             'name' => 'required|string|max:255',
         ]);
 
-        $id = Category::create([
-            'name' => $validated['name'],
-            'created_at' => now(),
-            'updated_at' => now(),
-        ])->get('id');
-
-
-        return response()->json([
-            'success' => true,
-            'category' => [
-                'id' => $id,
+        try{
+            $check = Category::create([
                 'name' => $validated['name'],
-            ]
-        ]);
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            flash()->success('Category created successfully');
+            return redirect()->route('category.index');
+
+        }catch(\Exception $e){
+            flash()->error($e->getMessage());
+            return redirect()->route('category.index');
+        }
+
+
+//        return response()->json([
+//            'success' => true,
+//            'category' => [
+//                'id' => $id,
+//                'name' => $validated['name'],
+//            ]
+//        ]);
     }
 }
