@@ -17,21 +17,31 @@
         <div class="space-y-3 mb-6 bg-white rounded shadow">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50 text-gray-600 text-sm uppercase">
-                <tr>
-                    <th class="px-6 py-3 text-left">#</th>
-                    <th class="px-6 py-3 text-left">Name</th>
+                <tr class="flex px-6 py-3 text-left">
+                    <th class=" flex-[1]">#</th>
+                    <th class=" flex-[2]">Name</th>
+                    <th class=" flex-[1]">Action</th>
                 </tr>
                 </thead>
-                <tbody id="category-list-body">
+                <tbody id="category-list-body ">
                 @foreach ($categories as $category)
-                    <tr>
-                        <td class="px-4 py-2 ">
+                    <tr class="flex px-6 py-3">
+                        <td class=" flex-[1]">
                             {{ $loop->iteration }}
                         </td>
-                        <td class="px-4 py-2">
-                            <div class="p-3 text-gray-700">
+                        <td class=" flex-[2]">
+                            <div class="text-gray-700">
                                 {{ $category->name }}
                             </div>
+                        </td>
+                        <td class="flex-[1]">
+                            <form action="{{route('category.delete', $category->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2">
+                                Delete
+                                </button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach

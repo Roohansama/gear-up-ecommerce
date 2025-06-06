@@ -33,14 +33,16 @@ class CategoryController extends Controller
             flash()->error($e->getMessage());
             return redirect()->route('category.index');
         }
+    }
 
-
-//        return response()->json([
-//            'success' => true,
-//            'category' => [
-//                'id' => $id,
-//                'name' => $validated['name'],
-//            ]
-//        ]);
+    public function delete($id){
+        try{
+            Category::where('id', $id)->delete();
+            flash()->success('Category deleted successfully');
+            return redirect()->route('category.index');
+        }catch(\Exception $e){
+            flash()->error($e->getMessage());
+            return redirect()->route('category.index');
+        }
     }
 }

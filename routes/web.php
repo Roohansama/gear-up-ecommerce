@@ -39,5 +39,6 @@ Route::group(['middleware' => 'auth:web'], function () {
     //category routes
     Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+    Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
 });
