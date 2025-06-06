@@ -47,7 +47,8 @@
             const addButton = document.getElementById('add-category-row');
             const rowContainer = document.getElementById('new-category-row');
             const categoryListBody = document.getElementById('category-list-body');
-            const iteration = {{($categories->count())+1}}
+            const iteration = {{($categories->count())+1}};
+
 
                 let
             inputAdded = false;
@@ -56,21 +57,29 @@
                 if (inputAdded) return;
 
                 const inputRow = document.createElement('div');
-                inputRow.className = "flex items-center space-x-2";
+                inputRow.className = "flex items-center justify-between space-x-2";
                 inputRow.innerHTML = `
-<form id="add-category-row" method="POST" action="{{route('category.store')}}">
+<form id="add-category-row" method="POST" action="{{route('category.store')}}" class="flex items-center justify-between">
 @csrf
-                <input type="text" id="new-category-name" name="name" placeholder="Enter category name"
-                            class="border rounded px-3 py-2 w-full">
-                     <button id="save-category"
-                         class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700">Save</button>
-         </form>
+                <button id="delete-row"
+                     class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700" type="button">X</button>
+            <input type="text" id="new-category-name" name="name" placeholder="Enter category name"
+                        class="border rounded px-3 py-2 w-full">
+                 <button id="save-category"
+                     class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700" type="submit">Save</button>
+     </form>
 `;
 
                 rowContainer.appendChild(inputRow);
                 inputAdded = true;
 
-                {{--document.getElementById('save-category').addEventListener('click', () => {--}}
+                inputRow.querySelector('#delete-row').addEventListener('click', () => {
+                    inputRow.remove();
+                    inputAdded = false;
+                });
+            });
+
+        {{--document.getElementById('save-category').addEventListener('click', () => {--}}
                 {{--    const name = document.getElementById('new-category-name').value;--}}
 
                 {{--    if (!name.trim()) {--}}
@@ -106,7 +115,6 @@
                 //                             }
                 //                         });
                 //                 });
-            });
         });
     </script>
 @endsection
