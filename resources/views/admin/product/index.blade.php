@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-full mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="w-full overflow-scroll mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Products</h1>
             <a href="{{ route('product.add') }}"
@@ -18,7 +18,8 @@
                     <th class="px-6 py-3 text-left">Image</th>
                     <th class="px-6 py-3 text-left">Name</th>
                     <th class="px-6 py-3 text-left">Category</th>
-                    <th class="px-6 py-3 text-left">Price</th>
+                    <th class="px-6 py-3 text-left">Cost</th>
+                    <th class="px-6 py-3 text-left">Sale Price</th>
                     <th class="px-6 py-3 text-left">Stock</th>
                     <th class="px-6 py-3 text-left">Actions</th>
                 </tr>
@@ -33,17 +34,17 @@
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">
                             {{ $product->name }}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-700">{{ '$product->category->name' ?? '-' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">{{ $product->category_name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">${{ number_format($product->price, 2) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">${{ number_format($product->sale_price, 2) }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $product->stock }}</td>
                         <td class="px-6 py-4 text-sm space-x-2">
-                            <a href=""
+                            <a href="{{route('product.edit', $product->id)}}"
                                class="text-blue-500 hover:underline">Edit</a>
-                            <form method="POST" action=""
+                            <form method="POST" action="{{route('product.delete',$product->id)}}"
                                   class="inline-block"
                                   onsubmit="return confirm('Delete this product?')">
                                 @csrf
-                                @method('DELETE')
                                 <button class="text-red-500 hover:underline" type="submit">Delete</button>
                             </form>
                         </td>

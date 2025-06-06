@@ -32,7 +32,9 @@ Route::group(['middleware' => 'auth:web'], function () {
     //product routes
     Route::get('products', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/add', [ProductController::class, 'showProductForm'])->name('product.add');
-    Route::post('/product/store', [ProductController::class, 'storeProduct'])->name('product.store');
+    Route::post('/product/store/{id?}', [ProductController::class, 'storeProduct'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'showProductForm'])->name('product.edit');
+    Route::post('/product/delete/{id}', [ProductController::class, 'deleteProduct'])->name('product.delete');
 
     //category routes
     Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
