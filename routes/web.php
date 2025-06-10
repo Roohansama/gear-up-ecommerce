@@ -4,7 +4,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\StoreController;
 
 route::get('/csrf', function () {
     return csrf_token();
@@ -42,3 +42,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
 });
+
+//USER Routes
+
+Route::get('/index', [StoreController::class, 'index'])->name('store.index');

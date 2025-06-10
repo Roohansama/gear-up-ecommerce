@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
     <div class="w-full overflow-scroll mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -29,7 +29,8 @@
                     <tr>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="w-20 h-20 object-cover">
+                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image"
+                                 class="w-20 h-20 object-cover">
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">
                             {{ $product->name }}

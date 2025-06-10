@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
     <div class="w-full overflow-scroll mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -6,13 +6,15 @@
             {{$id ? 'Edit' : 'Add New'}}
             Product</h2>
 
-        <form method="POST" action="{{ route('product.store', $id ?? null) }}" enctype="multipart/form-data" class="space-y-6 bg-white shadow rounded-lg py-8 px-4 sm:px-6 lg:px-8">
+        <form method="POST" action="{{ route('product.store', $id ?? null) }}" enctype="multipart/form-data"
+              class="space-y-6 bg-white shadow rounded-lg py-8 px-4 sm:px-6 lg:px-8">
             @csrf
 
             <!-- Name -->
             <div>
                 <label class="block font-medium mb-1">Product Name</label>
-                <input type="text" name="name" value="{{$id ? $product->name : null}}" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                <input type="text" name="name" value="{{$id ? $product->name : null}}"
+                       class="w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
             <!-- Description -->
@@ -25,28 +27,32 @@
             <!-- Price -->
             <div>
                 <label class="block font-medium mb-1">Price ($)</label>
-                <input type="number" name="price" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm" value="{{$id ? $product->price : null}}"
+                <input type="number" name="price" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm"
+                       value="{{$id ? $product->price : null}}"
                        required>
             </div>
 
             <!-- Sale Price -->
             <div>
                 <label class="block font-medium mb-1">Sale Price ($)</label>
-                <input type="number" name="sale_price" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm" value="{{$id ? $product->sale_price : null}}"
+                <input type="number" name="sale_price" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm"
+                       value="{{$id ? $product->sale_price : null}}"
                        required>
             </div>
 
             <!-- Sku -->
             <div>
                 <label class="block font-medium mb-1">Sku</label>
-                <input type="text" name="sku" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm" value="{{$id ? $product->sku : null}}"
+                <input type="text" name="sku" step="0.01" class="w-full border-gray-300 rounded-md shadow-sm"
+                       value="{{$id ? $product->sku : null}}"
                        required>
             </div>
 
             <!-- Stock -->
             <div>
                 <label class="block font-medium mb-1">Stock</label>
-                <input type="number" name="stock" class="w-full border-gray-300 rounded-md shadow-sm" value="{{$id ? $product->stock : null}}" required>
+                <input type="number" name="stock" class="w-full border-gray-300 rounded-md shadow-sm"
+                       value="{{$id ? $product->stock : null}}" required>
             </div>
 
             <!-- Category -->
@@ -56,7 +62,8 @@
                     <option value="">Select Category</option>
                     @if(isset($categories))
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ (isset($product) && $product->category_id == $category->id) ? 'selected' : '' }}>
+                            <option
+                                value="{{ $category->id }}" {{ (isset($product) && $product->category_id == $category->id) ? 'selected' : '' }}>
                                 {{ $category->name }}</option>
                         @endforeach
                     @endif
@@ -68,7 +75,8 @@
                 <label class="block font-medium mb-1">Product Image</label>
                 @if(isset($product) && $product->image_path)
                     <div class="mb-2">
-                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="Current Image" class="w-32 h-32 object-cover rounded-md">
+                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="Current Image"
+                             class="w-32 h-32 object-cover rounded-md">
                     </div>
                 @endif
                 <input type="file" name="image" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4

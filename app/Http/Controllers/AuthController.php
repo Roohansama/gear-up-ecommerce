@@ -40,10 +40,10 @@ class AuthController extends Controller
 
         session()->put('token', $token);
 
-        // Decode the token and login user in this app
+        // Decode the token and login store in this app
         JWTAuth::setToken($token);
         $payload = JWTAuth::getPayload();
-        $userId = $payload->get('sub'); // usually user ID
+        $userId = $payload->get('sub'); // usually store ID
         $user = \App\Models\User::find($userId);
         if ($user) {
             Auth::login($user); // this sets Laravel session

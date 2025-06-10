@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
     <div class="w-full mx-auto p-6  overflow-scroll py-8 px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@
                             <form action="{{route('category.delete', $category->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2">
-                                Delete
+                                    Delete
                                 </button>
                             </form>
 
@@ -60,8 +60,8 @@
             const iteration = {{($categories->count())+1}};
 
 
-                let
-            inputAdded = false;
+            let
+                inputAdded = false;
 
             addButton.addEventListener('click', () => {
                 if (inputAdded) return;
@@ -89,42 +89,42 @@
                 });
             });
 
-        {{--document.getElementById('save-category').addEventListener('click', () => {--}}
-                {{--    const name = document.getElementById('new-category-name').value;--}}
+            {{--document.getElementById('save-category').addEventListener('click', () => {--}}
+            {{--    const name = document.getElementById('new-category-name').value;--}}
 
-                {{--    if (!name.trim()) {--}}
-                {{--        alert('Category name is required');--}}
-                {{--        return;--}}
-                {{--    }--}}
+            {{--    if (!name.trim()) {--}}
+            {{--        alert('Category name is required');--}}
+            {{--        return;--}}
+            {{--    }--}}
 
-                {{--    fetch("{{ route('category.store') }}", {--}}
-                {{--        method: 'POST',--}}
-                {{--        headers: {--}}
-                {{--            'Content-Type': 'application/json',--}}
-                {{--            'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
-                {{--        },--}}
-                {{--        body: JSON.stringify({name})--}}
-                {{--    });--}}
-                //                         .then(res => res.json())
-                //                         .then(data => {
-                //                             if (data.success) {
-                //                                 const row = document.createElement('tr');
-                //                                 const newIndex = categoryListBody.rows.length+1;
-                //                                 row.className = "p-3 rounded text-gray-700 bg-green-50";
-                //                                 row.innerHTML = `
-                //     <td class="px-4 py-2 border">${newIndex}</td>
-                //     <td class="px-4 py-2 border">
-                //         <div class="p-3 text-gray-700">${data.category.name}</div>
-                //     </td>
-                // `;
-                //                                 categoryListBody.appendChild(row);
-                //                                 rowContainer.innerHTML = '';
-                //                                 inputAdded = false;
-                //                             } else {
-                //                                 alert('Error saving category');
-                //                             }
-                //                         });
-                //                 });
+            {{--    fetch("{{ route('category.store') }}", {--}}
+            {{--        method: 'POST',--}}
+            {{--        headers: {--}}
+            {{--            'Content-Type': 'application/json',--}}
+            {{--            'X-CSRF-TOKEN': '{{ csrf_token() }}'--}}
+            {{--        },--}}
+            {{--        body: JSON.stringify({name})--}}
+            {{--    });--}}
+            //                         .then(res => res.json())
+            //                         .then(data => {
+            //                             if (data.success) {
+            //                                 const row = document.createElement('tr');
+            //                                 const newIndex = categoryListBody.rows.length+1;
+            //                                 row.className = "p-3 rounded text-gray-700 bg-green-50";
+            //                                 row.innerHTML = `
+            //     <td class="px-4 py-2 border">${newIndex}</td>
+            //     <td class="px-4 py-2 border">
+            //         <div class="p-3 text-gray-700">${data.category.name}</div>
+            //     </td>
+            // `;
+            //                                 categoryListBody.appendChild(row);
+            //                                 rowContainer.innerHTML = '';
+            //                                 inputAdded = false;
+            //                             } else {
+            //                                 alert('Error saving category');
+            //                             }
+            //                         });
+            //                 });
         });
     </script>
 @endsection
