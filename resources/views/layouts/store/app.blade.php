@@ -11,7 +11,7 @@
 <body class="bg-gray-100 text-gray-900">
 @include('layouts.store.header')
 
-<main class="flex h-screen overflow-scroll">
+<main class="flex h-screen overflow-scroll font-roboto">
     @yield('content')
 </main>
 
