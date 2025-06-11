@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->string('sku')->nullable()->unique();
             $table->boolean('is_active')->default(true);
-            $table->string('image_path')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
         });

@@ -25,7 +25,6 @@ class ProductSeeder extends Seeder
                 'stock' => rand(0, 50),
                 'sku' => 'SKU-' . strtoupper(Str::random(6)),
                 'is_active' => true,
-                'image_path' => 'products/sample.jpg',
                 'category_id' => 1, // Make sure category with id 1 exists!
             ]);
         }
