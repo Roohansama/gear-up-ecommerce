@@ -18,10 +18,10 @@
             </div>
 
             <!-- Description -->
-            <div>
+            <div class="prose">
                 <label class="block font-medium mb-1">Description</label>
-                <textarea name="description" rows="4" class="w-full border-gray-300 rounded-md shadow-sm"
-                          required>{{$id ? $product->description : null}}</textarea>
+                <input id="description" type="hidden" name="description" value="{{ old('description', $product->description ?? '') }}">
+                <trix-editor input="description" class="trix-content mt-1 block w-full border border-gray-300 rounded-md shadow-sm"></trix-editor>
             </div>
 
             <!-- Price -->
@@ -79,7 +79,7 @@
                              class="w-32 h-32 object-cover rounded-md">
                     </div>
                 @endif
-                <input type="file" name="image" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                <input type="file" name="images[]" multiple class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
                    file:rounded-md file:border-0 file:text-sm file:font-semibold
                    file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
             </div>
@@ -93,5 +93,6 @@
         </form>
     </div>
 @endsection
+
 
 

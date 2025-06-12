@@ -36,7 +36,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @if(isset($products))
                         @foreach ($products as $product)
-                            <a href="{{route('product.show',$product->slug}}">
+                            <a href="{{route('product.show',$product->slug)}}">
                                 <div class="rounded-lg p-4 shadow hover:shadow-lg transition bg-white">
                                     <img src="{{ asset('storage/' . $images[$product->id][0]['image_path']) }}" alt="{{ $product->name }}"
                                          class="w-full h-40 object-cover mb-3 rounded-md">

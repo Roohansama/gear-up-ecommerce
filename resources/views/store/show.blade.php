@@ -28,7 +28,7 @@
                         @foreach ($images as $image)
                             <img src="{{ asset('storage/' . $image->image_path) }}"
                                  onclick="document.getElementById('mainImage').src = this.src" alt="image"
-                                 class="w-20 h-20 object-fit cursor-pointer rounded opacity-60 hover:opacity-100 hover:-translate-y-1/12 hover:border hover:border-gray-300 transition duration-700">
+                                 class="w-30 h-20 object-fit cursor-pointer rounded opacity-60 hover:opacity-100 hover:-translate-y-1/12 hover:border hover:border-gray-300 transition duration-700">
                         @endforeach
                     </div>
                 </div>
@@ -36,7 +36,9 @@
                 <!-- Product Description -->
                 <div class="w-full md:w-7/12">
                     <h2 class="text-2xl font-bold mb-2">{{ $product->name}}</h2>
-                    <p class="text-gray-700 mb-4">{{ $product->description }}</p>
+                    <div class="prose text-gray-700 mb-4">
+                        {!! $product->description !!}
+                    </div>
                     <p class="text-xl font-semibold mb-4">${{ $product->price }}</p>
 
                     <!-- Add to Cart / Buy Buttons -->

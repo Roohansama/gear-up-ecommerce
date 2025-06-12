@@ -7,6 +7,7 @@
 
     {{-- Load compiled CSS and JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
 </head>
 <body class="bg-gray-100 text-gray-900">
 @include('layouts.admin.header')
@@ -18,4 +19,6 @@
 
 @include('layouts.admin.footer')
 </body>
+@stack('scripts')
+<script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 </html>
