@@ -9,6 +9,13 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/*@layer utilities {*/
+/*    .dynamic-px {*/
+/*        padding-left: clamp(1rem, 2vw, 12rem);*/
+/*        padding-right: clamp(1rem, 2vw, 12rem);*/
+/*    }*/
+/*}*/
+
 /* Ensure bullets display properly for Trix editor content */
 .trix-content ul {
     list-style-type: disc; /* Ensure the disc (bullet) is displayed */

@@ -23,7 +23,7 @@
         </div>
 
         <div
-            class="flex flex-col md:flex-row w-full px-4 sm:px-6 lg:px-24 xl:px-72 space-y-6 md:space-y-0 md:space-x-6">
+            class="flex flex-col md:flex-row w-full mb-5 px-4 sm:px-6 lg:px-24 xl:px-72 space-y-6 md:space-y-0 md:space-x-6">
 
             <!-- Sidebar Filters -->
             <div class="hidden md:flex flex-col w-3/12">
@@ -33,7 +33,7 @@
 
             <!-- Product Grid -->
             <div class="w-full md:w-9/12">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     @if(isset($products))
                         @foreach ($products as $product)
                             <a href="{{route('product.show',$product->slug)}}">
@@ -50,8 +50,6 @@
                     @endif
                 </div>
             </div>
-
         </div>
-
     </div>
 @endsection

@@ -11,10 +11,11 @@
 <body class="bg-gray-100 text-gray-900">
 @include('layouts.store.header')
 
-<main class="flex h-screen overflow-scroll font-roboto">
+<main class="flex h-screen overflow-hidden font-roboto mb-5">
     @yield('content')
 </main>
 
 @include('layouts.store.footer')
 </body>
+@stack('scripts')
 </html>
