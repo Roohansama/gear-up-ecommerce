@@ -41,13 +41,57 @@
                         <div class="h-full w-1 bg-neutral-200"></div>
                         <div class="flex flex-col space-y-2">
                             @foreach($categories as $category)
-                                <a href="{{route('store.index', $category->name)}}" class="text-md text-gray-500 capitalize">{{$category->name}}</a>
+                                <a href="{{route('store.index', $category->name)}}"
+                                   class="text-md text-gray-500 capitalize">{{$category->name}}</a>
                             @endforeach
                         </div>
                     </div>
                 </div>
 
-                <!-- Add filter content here -->
+                {{--                PRICE RANGE FILTER--}}
+                <div class="w-full max-w-md mx-auto">
+                    <h3 class="text-lg font-semibold mb-4">Price Range</h3>
+                    <div class="relative h-10">
+                        <!-- Track -->
+                        <div
+                            class="absolute top-1/2 left-0 right-0 h-1 bg-gray-300 rounded transform -translate-y-1/2"></div>
+
+                        <!-- Selected Range Highlight -->
+                        <div id="range-selected"
+                             class="absolute top-1/2 h-1 bg-blue-500 rounded transform -translate-y-1/2 z-0">
+                        </div>
+
+                        <!-- Min Handle -->
+                        <input type="range" id="min-range" min="0" max="1000" value="0"
+                               class="absolute top-1/4 w-full pointer-events-none appearance-none z-10 bg-transparent
+           [&::-webkit-slider-thumb]:pointer-events-auto
+           [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4
+           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500
+           [&::-webkit-slider-thumb]:appearance-none
+           [&::-moz-range-thumb]:pointer-events-auto
+           [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4
+           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500"/>
+
+                        <!-- Max Handle -->
+                        <input type="range" id="max-range" min="0" max="1000" value="1000"
+                               class="absolute top-1/4 w-full pointer-events-none appearance-none z-10 bg-transparent
+           [&::-webkit-slider-thumb]:pointer-events-auto
+           [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4
+           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500
+           [&::-webkit-slider-thumb]:appearance-none
+           [&::-moz-range-thumb]:pointer-events-auto
+           [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4
+           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500"/>
+                    </div>
+
+                    <!-- Display values -->
+                    <div class="flex justify-between mt-2 text-sm text-gray-700">
+                        <span id="min-value">Rs0</span>
+                        <span id="max-value">Rs1000</span>
+                    </div>
+                </div>
+
+                {{--                END OF PRICE RANGE FILTER--}}
             </div>
 
             <!-- Product Grid -->
@@ -80,5 +124,43 @@
             var filterContent = document.getElementById('filter-content');
             filterContent.classList.toggle('hidden');
         });
+    </script>
+
+    {{--    PRICE SLIDER JS--}}
+    <script>
+        const minRange = document.getElementById("min-range");
+        const maxRange = document.getElementById("max-range");
+        const minValue = document.getElementById("min-value");
+        const maxValue = document.getElementById("max-value");
+        const selectedRange = document.getElementById("range-selected");
+
+        const updateRange = () => {
+            let min = parseInt(minRange.value);
+            let max = parseInt(maxRange.value);
+
+            if (min > max - 50) {
+                min = max - 50;
+                minRange.value = min;
+            }
+
+            if (max < min + 50) {
+                max = min + 50;
+                maxRange.value = max;
+            }
+
+            minValue.textContent = `Rs${min}`;
+            maxValue.textContent = `Rs${max}`;
+
+            const percentMin = (min / 1000) * 100;
+            const percentMax = (max / 1000) * 100;
+
+            selectedRange.style.left = percentMin + "%";
+            selectedRange.style.right = (100 - percentMax) + "%";
+        };
+
+        minRange.addEventListener("input", updateRange);
+        maxRange.addEventListener("input", updateRange);
+
+        updateRange();
     </script>
 @endsection
