@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
     public function index(Request $request){
+        $min_range = 0;
+        $max_range = 1000;
         $query = Product::query();
 
         if($request->has('category')){
@@ -19,16 +21,18 @@ class StoreController extends Controller
         }
         if($request->has('min_range')){
             $query->where('products.price', '>=', $request->min_range);
+            $min_range = $request->min_range;
         }
         if($request->has('max_range')){
             $query->where('products.price', '<=', $request->max_range);
+            $max_range = $request->max_range;
         }
 
         $products = $query->get();
         $images = ProductImage::all()->groupBy('product_id')->toArray();
         $categories = Category::all();
 
-        return view('store.index', compact(['products', 'images', 'categories']));
+        return view('store.index', compact(['products', 'images', 'categories', 'min_range', 'max_range']));
     }
 
     public function showProduct($slug){
