@@ -9,18 +9,25 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    public function index($category_name = null){
-        if($category_name == null){
-            $products = Product::all();
-        }else{
-            $products = Product::leftjoin('categories', 'products.category_id', '=', 'categories.id')
+    public function index(Request $request){
+        $query = Product::query();
+
+        if($request->has('category')){
+            $query->leftjoin('categories', 'products.category_id', '=', 'categories.id')
                 ->select('products.*', 'categories.name as category_name')
-                ->where('categories.name', $category_name)
-                ->get();
+                ->where('categories.name', $request->category);
         }
+        if($request->has('min_range')){
+            $query->where('products.price', '>=', $request->min_range);
+        }
+        if($request->has('max_range')){
+            $query->where('products.price', '<=', $request->max_range);
+        }
+
+        $products = $query->get();
         $images = ProductImage::all()->groupBy('product_id')->toArray();
         $categories = Category::all();
-//        dd($images[1][0]);
+
         return view('store.index', compact(['products', 'images', 'categories']));
     }
 
