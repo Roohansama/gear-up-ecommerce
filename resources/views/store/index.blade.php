@@ -51,15 +51,16 @@
                 {{--                PRICE RANGE FILTER--}}
                 <div class="w-full max-w-md mx-auto">
                     <form action="{{route('store.index')}}" method="get">
-                        <h3 class="text-lg font-semibold mb-4">Price Range</h3>
+                        <h3 class="text-lg font-semibold mb-4">FILTER BY PRICE</h3>
+                        <div class="bg-neutral-200 w-1/12 min-h-1"></div>
                         <div class="relative h-10">
                             <!-- Track -->
                             <div
-                                class="absolute top-1/2 left-0 right-0 h-1 bg-gray-300 rounded transform -translate-y-1/2"></div>
+                                class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 rounded transform -translate-y-1/2"></div>
 
                             <!-- Selected Range Highlight -->
                             <div id="range-selected"
-                                 class="absolute top-1/2 h-1 bg-blue-500 rounded transform -translate-y-1/2 z-0">
+                                 class="absolute top-1/2 h-1 bg-neutral-400 rounded transform -translate-y-1/2 z-0">
                             </div>
 
                             <!-- Min Handle -->
@@ -67,33 +68,34 @@
                                    class="absolute top-1/4 w-full pointer-events-none appearance-none z-10 bg-transparent
            [&::-webkit-slider-thumb]:pointer-events-auto
            [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4
-           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500
+           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-neutral-600
            [&::-webkit-slider-thumb]:appearance-none
            [&::-moz-range-thumb]:pointer-events-auto
            [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4
-           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500"/>
+           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-neutral-600"/>
 
                             <!-- Max Handle -->
                             <input type="range" id="max-range" name="max_range" min="0" max="1000" value="{{ request('max', 1000) }}"
                                    class="absolute top-1/4 w-full pointer-events-none appearance-none z-10 bg-transparent
            [&::-webkit-slider-thumb]:pointer-events-auto
            [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4
-           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500
+           [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-neutral-600
            [&::-webkit-slider-thumb]:appearance-none
            [&::-moz-range-thumb]:pointer-events-auto
            [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4
-           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500"/>
+           [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-neutral-600"/>
                         </div>
 
                         <!-- Display values -->
                         <div class="flex justify-between mt-2 text-sm text-gray-700">
                             <div class="flex flex-row w-half">
-                                <button type="submit">Filter</button>
+                                <button type="submit" class="px-2 py-1 bg-neutral-500 text-white rounded-full">FILTER</button>
                             </div>
                             <div class="flex flex-row w-half space-x-1">
-                                <span id="min-value">Rs0</span>
+                                <span>Price: </span>
+                                <span id="min-value" class="font-semibold">Rs0</span>
                                 <span>—</span>
-                                <span id="max-value">Rs1000</span>
+                                <span id="max-value" class="font-semibold">Rs1000</span>
                             </div>
                         </div>
                     </form>
