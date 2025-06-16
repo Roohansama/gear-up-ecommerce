@@ -48,5 +48,6 @@ Route::group(['middleware' => 'auth:web'], function () {
 Route::get('/index', [StoreController::class, 'index'])->name('store.index');
 Route::get('/shop/{slug?}', [StoreController::class, 'showProduct'])->name('product.show');
 
-Route::post('/cart/add', [StoreController::class, 'addToCart'])->name('store.cart');
 Route::get('/cart', [StoreController::class, 'showCart'])->name('store.cart');
+Route::post('/cart/add', [StoreController::class, 'addToCart'])->name('store.cart.add');
+Route::post('/cart/update', [StoreController::class, 'updateCart'])->name('store.cart.update');

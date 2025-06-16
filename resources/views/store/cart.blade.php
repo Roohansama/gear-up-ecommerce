@@ -16,11 +16,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($cart as $c)
+                        @foreach($cart as $product_id => $c)
                             <tr>
                                 <td class="text-left flex-[4] text-ellipsis py-4 ">{{$c['name']}}</td>
                                 <td class="text-center flex-[2] text-ellipsis py-4 font-semibold">Rs{{$c['price']}}</td>
-                                <td class="text-center flex-[2] text-ellipsis py-4">{{$c['quantity']}}</td>
+                                <td class="text-center flex justify-center flex-[2] text-ellipsis py-4">
+                                    <div class="border-1 border-neutral-300 flex w-[80px] h-[30px]">
+                                        <button onclick="decreaseQuantity({{$product_id}})" class="w-[20px] bg-neutral-100 cursor-pointer hover:bg-neutral-300">-</button>
+                                        <span id="quantity" class="w-[40px]">{{$c['quantity']}}</span>
+                                        <button onclick="increaseQuantity({{$product_id}})" class="w-[20px] bg-neutral-100 cursor-pointer hover:bg-neutral-300">+</button>
+                                    </div>
+                                </td>
                                 <td class="text-center flex-[2] text-ellipsis py-4 font-semibold">Rs{{$c['price']*$c['quantity']}}</td>
                             </tr>
                         @endforeach
@@ -51,4 +57,46 @@
             @endif
         </div>
     </div>
+    @push('scripts')
+        <script>
+            function decreaseQuantity(productId) {
+                let quantity = -1;
+                axios.post('/cart/update', {
+                    product_id: productId,
+                    quantity: quantity,
+                })
+                    .then(response => {
+                        alert(response.data.message);
+
+                        console.log(response.data.cart);
+                    })
+                    .catch(error => {
+                        console.error('Error updating cart:' .error);
+                })
+            }
+            function increaseQuantity(productId) {
+               let quantity = 1;
+                axios.post('/cart/update', {
+                    product_id: productId,
+                    quantity: quantity,
+                })
+                    .then(response => {
+                        alert(response.data.message);
+
+                        console.log(response.data.cart);
+                    })
+                    .catch(error => {
+                        console.error('Error updating cart:' .error);
+                    })
+
+                // updateQuantityView();
+            }
+
+            {{--function updateQuantityView() {--}}
+            {{--    let quantity = getElementByid('quantity');--}}
+            {{--    quantity.innerHTML = @session('cart')--}}
+            {{--}--}}
+        </script>
+
+    @endpush
 @endsection
