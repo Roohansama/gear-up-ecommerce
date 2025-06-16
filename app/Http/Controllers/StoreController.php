@@ -49,4 +49,8 @@ class StoreController extends Controller
             return redirect()->back();
         }
     }
+
+    public function cart(){
+        return view('store.cart');
+    }
 }

@@ -8,7 +8,7 @@
     {{-- Load compiled CSS and JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class=" text-gray-900">
+<body class="text-gray-900 font-light">
 @include('layouts.store.header')
 
 <main class="flex h-screen overflow-hidden font-roboto mb-5">

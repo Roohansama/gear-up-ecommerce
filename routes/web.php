@@ -47,3 +47,4 @@ Route::group(['middleware' => 'auth:web'], function () {
 
 Route::get('/index', [StoreController::class, 'index'])->name('store.index');
 Route::get('/shop/{slug?}', [StoreController::class, 'showProduct'])->name('product.show');
+Route::get('/cart', [StoreController::class, 'cart'])->name('cart.index');
