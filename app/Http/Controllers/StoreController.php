@@ -51,9 +51,39 @@ class StoreController extends Controller
     }
 
     public function showCart(){
-        return view('store.cart');
+        $cart = session()->get('cart');
+        $total = 0;
+        if($cart){
+            foreach($cart as $product){
+                $total += $product['price'] * $product['quantity'];
+            }
+        }
+        return view('store.cart', compact(['cart', 'total']));;
     }
-    public function addToCart(){
 
+    public function addToCart(Request $request){
+
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity', 1);
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            $product = Product::findOrFail($productId);
+            $cart[$productId] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $quantity
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cart' => $cart
+        ]);
     }
 }
