@@ -45,7 +45,7 @@
                         {!! $product->description !!}
                     </div>
                     <!-- Add to Cart / Buy Buttons -->
-                    <button class="text-white px-6 py-2 rounded bg-amber-400 hover:bg-amber-500 mb-5 cursor-pointer">
+                    <button onclick="addToCart({{$product->id}})" class="text-white px-6 py-2 rounded bg-amber-400 hover:bg-amber-500 mb-5 cursor-pointer">
                         Add to Cart
                     </button>
                 </div>
@@ -57,43 +57,23 @@
 
     </div>
 @push('scripts')
-{{--    <script>--}}
-{{--        const image = document.getElementById('main-image');--}}
-{{--        const lens = document.getElementById('zoom-lens');--}}
 
-{{--        const zoomLevel = 2;--}}
-
-{{--        lens.style.backgroundImage = `url(${image.src})`;--}}
-{{--        lens.style.backgroundRepeat = "no-repeat";--}}
-{{--        lens.style.backgroundSize = `${image.width * zoomLevel}px ${image.height * zoomLevel}px`;--}}
-
-{{--        image.addEventListener("mousemove", moveLens);--}}
-{{--        lens.addEventListener("mousemove", moveLens);--}}
-{{--        image.addEventListener("mouseenter", () => lens.style.display = "block");--}}
-{{--        image.addEventListener("mouseleave", () => lens.style.display = "none");--}}
-
-{{--        function moveLens(e) {--}}
-{{--            const pos = getCursorPos(e);--}}
-{{--            let x = pos.x - lens.offsetWidth / 2;--}}
-{{--            let y = pos.y - lens.offsetHeight / 2;--}}
-
-{{--            // Prevent lens from going outside--}}
-{{--            x = Math.max(0, Math.min(x, image.width - lens.offsetWidth));--}}
-{{--            y = Math.max(0, Math.min(y, image.height - lens.offsetHeight));--}}
-
-{{--            lens.style.left = `${x}px`;--}}
-{{--            lens.style.top = `${y}px`;--}}
-{{--            lens.style.backgroundPosition = `-${x * zoomLevel}px -${y * zoomLevel}px`;--}}
-{{--        }--}}
-
-{{--        function getCursorPos(e) {--}}
-{{--            const rect = image.getBoundingClientRect();--}}
-{{--            return {--}}
-{{--                x: e.clientX - rect.left,--}}
-{{--                y: e.clientY - rect.top--}}
-{{--            };--}}
-{{--        }--}}
-{{--    </script>--}}
+        <script>
+            function addToCart(productId) {
+            axios.post('/cart/add', {
+                product_id: productId,
+                quantity: 1
+            })
+                .then(response => {
+                    alert(response.data.message);
+                    // You can update cart UI here
+                    console.log(response.data.cart);
+                })
+                .catch(error => {
+                    console.error('Error adding to cart:', error);
+                });
+        }
+    </script>
 
 @endpush
 @endsection

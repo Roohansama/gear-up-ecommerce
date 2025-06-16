@@ -50,7 +50,10 @@ class StoreController extends Controller
         }
     }
 
-    public function cart(){
+    public function showCart(){
         return view('store.cart');
+    }
+    public function addToCart(){
+
     }
 }

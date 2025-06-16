@@ -23,9 +23,9 @@
                         </tr>
                         </tbody>
                     </table>
-                <button class="border-2 p-1 md:w-1/3">
+                <a href="{{route('store.index')}}" class="border-2 text-center p-1 md:w-1/3 cursor-pointer hover:bg-neutral-600 hover:text-white transition-all duration-300">
                     ← CONTINUE SHOPPING
-                </button>
+                </a>
             </div>
             <div class="flex flex-col w-full md:w-5/12 px-5 md:pl-10">
                <div class="mb-3 border-b-3 border-neutral-300">

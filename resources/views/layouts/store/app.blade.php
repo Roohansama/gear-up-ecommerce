@@ -7,6 +7,10 @@
 
     {{-- Load compiled CSS and JS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
+    </script>
 </head>
 <body class="text-gray-900 font-light">
 @include('layouts.store.header')
@@ -18,4 +22,6 @@
 @include('layouts.store.footer')
 </body>
 @stack('scripts')
+
+
 </html>
