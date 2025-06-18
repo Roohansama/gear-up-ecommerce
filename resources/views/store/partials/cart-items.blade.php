@@ -11,12 +11,18 @@
         <tbody>
         @foreach($cart as $product_id => $c)
             <tr>
-                <td class="text-left flex-[4] text-ellipsis py-4 ">{{$c['name']}}</td>
+                <td class="text-left flex flex-[4] text-ellipsis py-4 ">
+                    <button onclick="removeItem(this)" data-id="{{$product_id}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="size-6 hover:stroke-current hover:cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </button>
+                    {{$c['name']}}
+                </td>
                 <td class="text-center flex-[2] text-ellipsis py-4 font-semibold">Rs{{$c['price']}}</td>
                 <td class="text-center flex justify-center flex-[2] text-ellipsis py-4">
                     <div class="border-1 border-neutral-300 flex w-[80px] h-[30px] cart-item" >
                         <button onclick="decreaseQuantity(this)" data-id="{{$product_id}}" class="w-[20px] bg-neutral-100 cursor-pointer hover:bg-neutral-300">-</button>
-                        <input id="quantity" class="w-[40px] text-center" value="{{$c['quantity']}}">
+                        <input id="quantity" min="0" class="w-[40px] text-center" value="{{$c['quantity']}}" disabled>
                         <button onclick="increaseQuantity(this)" data-id="{{$product_id}}" class="w-[20px] bg-neutral-100 cursor-pointer hover:bg-neutral-300">+</button>
                     </div>
                 </td>
@@ -31,7 +37,7 @@
 </div>
 <div class="flex flex-col w-full md:w-5/12 px-5 md:pl-10">
     <div class="mb-3 border-b-3 border-neutral-300">
-        <h1>CART TOTALS</h1>
+        <h1 class="font-semibold">CART TOTALS</h1>
     </div>
     <div class="flex flex-row py-2 justify-between border-b-2 border-neutral-300">
         <p>Subtotal</p>
@@ -45,5 +51,7 @@
         <p>Total</p>
         <p class="font-semibold">Rs{{$total}}</p>
     </div>
-    <button class="bg-amber-400 w-full p-2 text-white cursor-pointer">PROCEED TO CHECKOUT</button>
+    <a href="{{route('store.checkout')}}" class="bg-amber-400 w-full p-2 text-white cursor-pointer text-center">PROCEED TO CHECKOUT</a>
 </div>
+
+

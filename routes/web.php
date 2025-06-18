@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     });
 
     //product routes
-    Route::get('products', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/add', [ProductController::class, 'showProductForm'])->name('product.add');
     Route::post('/product/store/{id?}', [ProductController::class, 'storeProduct'])->name('product.store');
     Route::get('/product/edit/{id}', [ProductController::class, 'showProductForm'])->name('product.edit');
@@ -51,3 +51,6 @@ Route::get('/shop/{slug?}', [StoreController::class, 'showProduct'])->name('prod
 Route::get('/cart', [StoreController::class, 'showCart'])->name('store.cart');
 Route::post('/cart/add', [StoreController::class, 'addToCart'])->name('store.cart.add');
 Route::post('/cart/update', [StoreController::class, 'updateCart'])->name('store.cart.update');
+Route::get('/cart/partial', [StoreController::class, 'getCartPartial'])->name('store.cart.partial');
+Route::post('/cart/remove-item', [StoreController::class, 'removeItem'])->name('store.cart.remove-item');
+Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout');

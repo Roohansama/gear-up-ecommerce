@@ -9,6 +9,13 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader {
+    animation: spin 1s linear infinite;
+}
 /*@layer utilities {*/
 /*    .dynamic-px {*/
 /*        padding-left: clamp(1rem, 2vw, 12rem);*/

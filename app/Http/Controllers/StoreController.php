@@ -112,4 +112,46 @@ class StoreController extends Controller
         );
 
     }
+
+    public function getCartPartial(){
+        $cart = session('cart', []);
+        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+        session()->put('total', $total);
+
+        if(count($cart) == 0){
+            session()->forget('cart');
+            return view('store.partials.empty-cart');
+        }else{
+            return view('store.partials.cart-items', compact('cart', 'total'));
+        }
+    }
+
+    public function removeItem(Request $request){
+
+        try {
+            $product_id = $request->input('product_id');
+
+            $cart = session()->get('cart');
+            if(isset($cart[$product_id])){
+                unset($cart[$product_id]);
+                session()->put('cart', $cart);
+                if(count($cart) == 0){
+                    return redirect()->route('store.cart');
+                }
+            }
+            return response()->json([
+                'message' => 'Product removed from cart successfully!',
+                'cart' => $cart
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function showCheckout(){
+//        dd(session('cart'), session('total'));
+//        dd($request->all());
+        return view('store.checkout');
+    }
+
 }

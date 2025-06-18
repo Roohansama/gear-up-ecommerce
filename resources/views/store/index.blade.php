@@ -2,50 +2,33 @@
 
 @section('content')
     <div class="flex flex-col space-y-4 w-full">
+        @include('store.breadcrumbs')
         <div
-            class="flex flex-col md:flex-row items-center justify-between w-full min-h-24 bg-neutral-700 text-white px-4 md:px-8 lg:px-24 xl:px-72 py-4 md:py-5 space-y-3 md:space-y-0">
-            <!-- Empty Spacer (for alignment on desktop) -->
-            <span class="hidden md:block md:w-2/5"></span>
+            class="container mx-auto flex flex-col md:flex-row w-full mb-5 space-y-6 md:space-y-0 md:space-x-6">
 
-            <!-- Breadcrumb -->
-            <h3 class="text-sm md:text-base text-center md:text-left md:w-2/5">
-                HOME / SHOP / COMPUTERS
-            </h3>
-
-            <!-- Sort Dropdown -->
-            <div class="w-full md:w-1/5 flex justify-center md:justify-end">
-                <select name="sort" id="sort"
-                        class="w-2/3 md:w-full bg-neutral-500 p-2 rounded-full text-sm focus:outline-none">
-                    <option value="1">Sort by popularity</option>
-                    <!-- Add more sort options if needed -->
-                </select>
-            </div>
-        </div>
-
-        <div
-            class="flex flex-col md:flex-row w-full mb-5 px-4 sm:px-6 lg:px-24 xl:px-72 space-y-6 md:space-y-0 md:space-x-6">
             @include('store.filter')
 
-        <!-- Product Grid -->
-        <div class="w-full md:w-9/12">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                @if(isset($products))
-                    @foreach ($products as $product)
-                        <a href="{{route('product.show',$product->slug)}}">
-                            <div class="rounded-lg p-4 hover:shadow-lg transition bg-white">
-                                <img src="{{ asset('storage/' . $images[$product->id][0]['image_path']) }}"
-                                     alt="{{ $product->name }}"
-                                     class="w-full h-40 object-cover mb-3 rounded-md">
-                                <p class=" text-base mb-1 truncate">{{ $product->name }}</p>
-                                <div class="flex flex-row font-semibold mb-4"><span
-                                        class="flex text-md align-top">Rs</span><span
-                                        class="text-md">{{number_format($product->price)  }}</span></div>
-                            </div>
-                        </a>
-                    @endforeach
-                @else
-                    <h1>Product not found</h1>
-                @endif
+            <!-- Product Grid -->
+            <div class="w-full md:w-9/12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    @if(isset($products))
+                        @foreach ($products as $product)
+                            <a href="{{route('product.show',$product->slug)}}">
+                                <div class="rounded-lg p-4 hover:shadow-lg transition bg-white">
+                                    <img src="{{ asset('storage/' . $images[$product->id][0]['image_path']) }}"
+                                         alt="{{ $product->name }}"
+                                         class="w-full h-40 object-fit mb-3 rounded-md">
+                                    <p class=" text-base mb-1 truncate">{{ $product->name }}</p>
+                                    <div class="flex flex-row font-semibold mb-4"><span
+                                            class="flex text-md align-top">Rs</span><span
+                                            class="text-md">{{number_format($product->price)  }}</span></div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @else
+                        <h1>Product not found</h1>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
