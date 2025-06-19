@@ -4,7 +4,7 @@
         <a href="{{route('store.index')}}" class="text-xl font-bold w-full sm:w-auto text-center sm:text-left cursor-pointer">Gear Up Ecommerce</a>
 
         <!-- Search Bar -->
-        <div class="w-full sm:flex-1">
+        <div class="w-full px-3 md:px-0 sm:flex-1">
             <input
                 type="text"
                 class="bg-neutral-700 w-full max-h-10 rounded-full px-4 py-2 text-white placeholder:text-gray-400"
@@ -13,7 +13,7 @@
         </div>
 
         <!-- User and Cart -->
-        <div class="flex items-center justify-end w-full sm:w-auto space-x-4">
+        <div class="flex items-center justify-end w-full sm:w-auto space-x-4 px-3 md:px-0">
             <!-- User Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="orange" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="orange" class="size-6">

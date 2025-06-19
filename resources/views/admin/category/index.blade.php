@@ -52,6 +52,9 @@
 
     </div>
 
+@endsection
+
+@push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const addButton = document.getElementById('add-category-row');
@@ -127,4 +130,4 @@
             //                 });
         });
     </script>
-@endsection
+@endpush

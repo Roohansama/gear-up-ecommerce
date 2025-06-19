@@ -56,10 +56,11 @@
         @endif
 
     </div>
+@endsection
 @push('scripts')
 
-        <script>
-            function addToCart(productId) {
+    <script>
+        function addToCart(productId) {
             axios.post('/cart/add', {
                 product_id: productId,
                 quantity: 1
@@ -76,4 +77,3 @@
     </script>
 
 @endpush
-@endsection
