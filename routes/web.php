@@ -53,4 +53,8 @@ Route::post('/cart/add', [StoreController::class, 'addToCart'])->name('store.car
 Route::post('/cart/update', [StoreController::class, 'updateCart'])->name('store.cart.update');
 Route::get('/cart/partial', [StoreController::class, 'getCartPartial'])->name('store.cart.partial');
 Route::post('/cart/remove-item', [StoreController::class, 'removeItem'])->name('store.cart.remove-item');
+
+//show checkout
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout');
+//post checkout
+Route::post('/checkout', [StoreController::class, 'placeOrder'])->name('store.place-order');;

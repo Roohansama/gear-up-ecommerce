@@ -55,18 +55,18 @@ class StoreController extends Controller
     public function showCart()
     {
         $cart = session()->get('cart');
-        $total = 0;
-        if ($cart) {
-            foreach ($cart as $product) {
-                $total += $product['price'] * $product['quantity'];
-            }
-        }
-        return view('store.cart', compact(['cart', 'total']));;
+        $total = session()->get('total');
+//        $total = 0;
+//        if ($cart) {
+//            foreach ($cart as $product) {
+//                $total += $product['price'] * $product['quantity'];
+//            }
+//        }
+        return view('store.cart', compact(['cart', 'total']));
     }
 
     public function addToCart(Request $request)
     {
-
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
 
@@ -83,7 +83,9 @@ class StoreController extends Controller
             ];
         }
 
+        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
         session()->put('cart', $cart);
+        session()->put('total', $total);
 
         return response()->json([
             'message' => 'Product added to cart successfully!',
@@ -91,6 +93,7 @@ class StoreController extends Controller
         ]);
     }
 
+    //on quantity change
     public function updateCart(Request $request)
     {
         $product_id = $request->input('product_id');
@@ -101,7 +104,6 @@ class StoreController extends Controller
             $cart = session()->get('cart');
             $cart[$product_id]['quantity'] += $quantity;
             session()->put('cart', $cart);
-//            session()->flash('success', 'Cart updated successfully');
             return response()->json([
                 'message' => 'Cart updated successfully!',
                 'cart' => $cart
@@ -113,6 +115,7 @@ class StoreController extends Controller
 
     }
 
+    //after quantity change, recalculate totals and return partial view
     public function getCartPartial(){
         $cart = session('cart', []);
         $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
@@ -120,14 +123,15 @@ class StoreController extends Controller
 
         if(count($cart) == 0){
             session()->forget('cart');
+            session()->forget('total');
             return view('store.partials.empty-cart');
         }else{
             return view('store.partials.cart-items', compact('cart', 'total'));
         }
     }
 
+    //remove item from cart and return
     public function removeItem(Request $request){
-
         try {
             $product_id = $request->input('product_id');
 
@@ -149,9 +153,10 @@ class StoreController extends Controller
     }
 
     public function showCheckout(){
-//        dd(session('cart'), session('total'));
-//        dd($request->all());
-        return view('store.checkout');
+        $cart = session()->get('cart');
+        $total = session()->get('total');
+//        dd($total);
+        return view('store.checkout', ['cart' => $cart, 'total' => $total]);
     }
 
 }
