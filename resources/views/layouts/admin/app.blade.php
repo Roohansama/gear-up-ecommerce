@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class=" text-gray-900">
 @include('layouts.admin.header')
 
 <main class="flex h-screen">

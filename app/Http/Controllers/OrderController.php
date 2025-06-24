@@ -19,6 +19,13 @@ class OrderController extends Controller
         return view('admin.order.order', compact('orders'));
     }
 
+    public function showOrderSub(Request $request){
+
+        $order_sub = (object) $request->order; // cast to object for easier blade access
+
+        return view('admin.order.order-details-sub', compact('order_sub'))->render();
+    }
+
     public function PlaceOrder(Request $request)
     {
         $validated = $request->validate([

@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth:web'], function () {
 
     //order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+    Route::post('/order/sub', [OrderController::class, 'showOrderSub'])->name('order.sub');
     Route::get('/order/view/{id}', [OrderController::class, 'show'])->name('order.show');
     Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
 
