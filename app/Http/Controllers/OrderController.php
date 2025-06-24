@@ -12,9 +12,9 @@ class OrderController extends Controller
 
     public function index()
     {
-        $orders = Order::with('orderItems')->get()->toArray();
+        $orders = Order::with('orderItems')->get();
 
-        dd($orders);
+//        dd($orders);
 
         return view('admin.order.order', compact('orders'));
     }

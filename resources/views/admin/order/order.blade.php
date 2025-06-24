@@ -26,20 +26,28 @@
                 <tbody class="divide-y divide-gray-100">
                 @if(isset($orders))
                     @forelse($orders as $order)
-                        @foreach($order as $o)
+
                             <tr>
                                 <td class="px-6 py-4 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                    {{ $o->order_number ?? '-' }}
+                                    {{ $order->order_number ?? '-' }}
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-700">{{ $o->first_name.' '.$o->last_name }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">$</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">{{ $o->created_at }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">{{ $o->order_status }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->first_name.' '.$order->last_name }}</td>
+                                @php
+                                $total = 0 ;
+                                foreach ($order->orderItems as $item)
+                                    {
+                                       $itemTotal = $item->price * $item->quantity;
+                    $total += $itemTotal;
+                                    }
+                                    @endphp
+                                <td class="px-6 py-4 text-sm text-gray-700 font-semibold">{{$total}}/-</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->created_at }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-700">{{ $order->order_status }}</td>
                                 <td class="px-6 py-4 text-sm space-x-2">
                                     {{--                                <a href="{{route('order.edit', $order->id)}}"--}}
                                     {{--                                   class="text-blue-500 hover:underline">Edit</a>--}}
-                                    <form method="POST" action="{{route('order.delete',$o->id)}}"
+                                    <form method="POST" action="{{route('order.delete',$order->id)}}"
                                           class="inline-block"
                                           onsubmit="return confirm('Delete this product?')">
                                         @csrf
@@ -47,7 +55,7 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+
                     @empty
                         <tr>
                             <td colspan="7" class="px-6 py-4 text-center text-gray-500">
