@@ -1,7 +1,8 @@
 @if(isset($order_sub))
-    <div>
-        <h2 class="text-xl font-bold">Order #{{ $order_sub->order_number }}</h2>
-        <p>Customer: {{ $order_sub->first_name }}</p>
+    <div class="flex flex-col">
+        <h1 class="text-2xl font-semibold">Order #{{ $order_sub->order_number }}</h1>
+        <p class="text-sm">Order Date: {{ $order_sub->created_at->format('F j, Y')  }}</p>
+
         {{-- loop over $order->order_items if you have it --}}
     </div>
 @else

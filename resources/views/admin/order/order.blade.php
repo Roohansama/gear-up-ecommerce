@@ -53,7 +53,7 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm space-x-2">
                                         <button
-                                           class="text-blue-500 hover:underline" onclick="loadOrderDetailSub({{$order}})">Open</button>
+                                           class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order}})">Open</button>
 {{--                                        <form method="POST" action="{{route('order.delete',$order->id)}}"--}}
 {{--                                              class="inline-block"--}}
 {{--                                              onsubmit="return confirm('Delete this product?')">--}}

@@ -1,5 +1,5 @@
 <!-- Sidebar: scrolls independently -->
-<aside class="min-w-64 border-r overflow-y-auto select-none scrollbar-hide hidden md:block bg-white shadow">
+<aside class="min-w-64 border-r border-r-gray-300 overflow-y-auto select-none scrollbar-hide hidden md:block bg-white shadow">
     <div class="p-6">
         <!-- Admin User -->
         <div class="flex items-center space-x-4 text-lg text-text mb-8 mt-4 px-2">
