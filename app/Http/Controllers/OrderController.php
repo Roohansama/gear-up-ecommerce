@@ -5,30 +5,47 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function PlaceOrder(Request $request){
+
+    public function index()
+    {
+        $orders = Order::with('orderItems')->get()->toArray();
+
+        dd($orders);
+
+        return view('admin.order.order', compact('orders'));
+    }
+
+    public function PlaceOrder(Request $request)
+    {
         $validated = $request->validate([
-            'first_name'   => 'string|max:255',
-            'second_name'  => 'string|max:255',
-            'address_1'    => 'string|max:255',
-            'address_2'    => 'nullable|string|max:255',
-            'city'         => 'string|max:255',
-            'country'      => 'string|max:255',
-            'postcode'     => 'string|max:20',
-            'phone'        => 'string|max:20',
-            'email'        => 'email|max:255',
-            'order_notes'  => 'nullable|string',
+            'first_name' => 'string|max:255',
+            'last_name' => 'string|max:255',
+            'address_1' => 'string|max:255',
+            'address_2' => 'nullable|string|max:255',
+            'city' => 'string|max:255',
+            'country' => 'string|max:255',
+            'postcode' => 'string|max:20',
+            'phone' => 'string|max:20',
+            'email' => 'email|max:255',
+            'order_notes' => 'nullable|string',
         ]);
 
-        try{
+        try {
 
-            $order_id = Order::create($validated)->id();
             $cart = session()->get('cart');
 
+            $order_id = Order::max('id') + 1;
 
-            foreach($cart as $product_id => $item){
+            $validated['order_number'] = 'GUE-' . str_pad($order_id, 6, '0', STR_PAD_LEFT);
+            $validated['order_status'] = 'pending';
+
+            Order::create($validated);
+
+            foreach ($cart as $product_id => $item) {
                 OrderItem::create([
                     'order_id' => $order_id,
                     'product_id' => $product_id,
@@ -39,8 +56,10 @@ class OrderController extends Controller
             }
 
             flash()->success('Order Placed successfully!');
-            return redirect()->back();
-        }catch(\Exception $e){
+
+            session()->forget('cart');
+            return redirect()->to('index');
+        } catch (\Exception $e) {
             flash()->error($e->getMessage());
             return redirect()->back();
         }

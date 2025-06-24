@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -41,6 +42,11 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
     Route::post('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
+    //order routes
+    Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/view/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+
 });
 
 //USER Routes
@@ -57,4 +63,4 @@ Route::post('/cart/remove-item', [StoreController::class, 'removeItem'])->name('
 //show checkout
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout');
 //post checkout
-Route::post('/checkout', [StoreController::class, 'placeOrder'])->name('store.place-order');;
+Route::post('/checkout', [OrderController::class, 'placeOrder'])->name('store.place-order');

@@ -13,8 +13,8 @@
                             <input type="text" name="first_name" class="border-1 border-gray-300 w-full h-9 shadow2xl">
                         </div>
                         <div class="flex flex-col w-1/2 space-y-2">
-                            <label for="second_name" class="font-semibold">Second Name</label>
-                            <input type="text" name="second_name" class="border-1 border-gray-300 w-full h-9">
+                            <label for="last_name" class="font-semibold">Last Name</label>
+                            <input type="text" name="last_name" class="border-1 border-gray-300 w-full h-9">
                         </div>
                     </div>
 
