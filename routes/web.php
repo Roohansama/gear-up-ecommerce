@@ -46,7 +46,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
     //order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order/sub', [OrderController::class, 'showOrderSub'])->name('order.sub');
-    Route::get('/order/view/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/order/view/{id}', [OrderController::class, 'showOrder'])->name('order.show');
     Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
 
 //});

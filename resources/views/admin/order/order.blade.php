@@ -54,9 +54,11 @@
                                     <td class="flex px-6 py-4 text-sm space-x-4">
                                         <button
                                            class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order->id}})">Open</button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 cursor-pointer">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                        </svg>
+                                        <a href="{{route('order.show', $order->id)}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 cursor-pointer">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                            </svg>
+                                        </a>
 
                                         {{--                                        <form method="POST" action="{{route('order.delete',$order->id)}}"--}}
 {{--                                              class="inline-block"--}}
@@ -80,7 +82,7 @@
                     </table>
                 </div>
             </div>
-            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg p-2 max-h-[82vh] overflow-scroll md:overflow-hidden" id="order-details">
+            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg px-3 py-1 max-h-[82vh] overflow-scroll" id="order-details">
                 @include('admin.order.order-details-sub')
             </div>
         </div>

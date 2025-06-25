@@ -15,8 +15,21 @@ class OrderController extends Controller
     {
         $orders = Order::with('orderItems')->get();
 
-
         return view('admin.order.order', compact('orders', ));
+    }
+
+    public function showOrder($id){
+        $order = Order::with('orderItems')->where('id', $id)->first();
+        $product_ids = [];
+        foreach ($order->orderItems as $item)
+        {
+            $product_ids[] = $item->product_id;
+        }
+
+        $product_images = ProductImage::where('product_id', $product_ids)->get()->toArray();
+
+        return view('admin.order.order-details', compact('order','product_images'));
+
     }
 
     public function showOrderSub(Request $request){
