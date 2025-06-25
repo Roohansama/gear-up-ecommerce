@@ -1,7 +1,55 @@
 @if(isset($order_sub))
-    <div class="flex flex-col">
-        <h1 class="text-2xl font-semibold">Order #{{ $order_sub->order_number }}</h1>
-        <p class="text-sm">Order Date: {{ $order_sub->created_at->format('F j, Y')  }}</p>
+    <div class="flex flex-col space-y-4">
+        <h1 class="text-xl font-semibold">Order #{{ $order_sub->order_number }}</h1>
+{{--        <p class="text-sm">Order Date: {{ $order_sub->created_at->format('F j, Y')  }}</p>--}}
+        <div class="flex justify-between">
+            <p class="text-gray-400 font-semibold">Payment</p>
+            <p class="bg-green-500 text-white px-1.5 py-0.5 rounded">Completed</p>
+        </div>
+        <div class="flex justify-between">
+            <p class="text-gray-400 font-semibold">Status</p>
+            <p class="px-1.5 py-0.5 rounded text-white
+                                    {{ $order_sub->order_status == 'pending' ? 'bg-yellow-500' :
+                                ($order_sub->order_status == 'confirmed' ? 'bg-green-600' :
+                                ($order_sub->order_status == 'cancelled' ? 'bg-red-600' : 'bg-gray-500')) }}">
+                                        {{ ucfirst($order_sub->order_status) }}
+                                    </p>
+        </div>
+        <div class="flex justify-between">
+            <p class="text-gray-400 font-semibold">Customer</p>
+            <p>{{$order_sub->first_name.' '.$order_sub->last_name }}</p>
+        </div>
+        <div class="flex justify-between">
+            <p class="text-gray-400 font-semibold">Order Date</p>
+            <p>{{$order_sub->created_at->format('F j, Y') }}</p>
+        </div>
+        <div class="flex justify-between">
+            <p class="text-gray-400 font-semibold">Ship Date</p>
+            <p>hmm</p>
+        </div>
+
+        <div class="flex flex-col space-y-3">
+            <p class="text-gray-400 font-semibold">Order Notes</p>
+            <textarea name="description" id="" rows="5" class="bg-gray-100 resize-none p-3 rounded-lg" disabled>{{$order_sub->order_notes}}</textarea>
+        </div>
+        <div class="min-h-0.5 min-w-full bg-gray-200"></div>
+        <div class="flex flex-col space-y-3 mt-4 mb-4 border-1 border-gray-200 p-3 rounded-lg">
+        @foreach($order_sub->orderItems as $item)
+                <div class="flex justify-between">
+                    <p class="font-semibold">{{ucfirst($item->product_name)}}</p>
+                    <p>{{$item->price}}
+                    <span class="font-semibold">
+                        {{'x'.$item->quantity}}
+                    </span></p>
+                </div>
+                <div class="min-h-0.5 min-w-full bg-gray-200"></div>
+        @endforeach
+            <div class="flex justify-between">
+                <p class=" font-semibold">Total</p>
+                <p class="font-semibold">{{$total}}/-</p>
+            </div>
+        </div>
+
 
         {{-- loop over $order->order_items if you have it --}}
     </div>

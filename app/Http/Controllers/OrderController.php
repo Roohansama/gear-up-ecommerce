@@ -21,10 +21,18 @@ class OrderController extends Controller
 
     public function showOrderSub(Request $request){
 
-        $order_sub = (object) $request->order; // cast to object for easier blade access
-        $order_sub->created_at = \Carbon\Carbon::parse($order_sub->created_at);
+        $id = $request->order_id; // cast to object for easier blade access
 
-        return view('admin.order.order-details-sub', compact('order_sub'))->render();
+        $order_sub = Order::with('orderItems')->where('id', $id)->first();
+
+        $total = 0 ;
+        foreach ($order_sub->orderItems as $item)
+        {
+            $itemTotal = $item->price * $item->quantity;
+            $total += $itemTotal;
+        }
+
+        return view('admin.order.order-details-sub', compact('order_sub','total'))->render();
     }
 
     public function PlaceOrder(Request $request)

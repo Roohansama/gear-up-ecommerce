@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <div class="w-full overflow-scroll mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+    <div class="w-full container overflow-scroll mx-auto mt-5">
+        <div class="flex flex-col-reverse px-2 md:px-0 md:flex-row space-y-2 md:space-y-0 md:space-x-2">
             <div class="w-full md:w-4/6 border-1 border-gray-300 shadow-md rounded-lg p-2" id="order-list">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-bold text-gray-800">Orders</h1>
@@ -53,7 +53,7 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm space-x-2">
                                         <button
-                                           class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order}})">Open</button>
+                                           class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order->id}})">Open</button>
 {{--                                        <form method="POST" action="{{route('order.delete',$order->id)}}"--}}
 {{--                                              class="inline-block"--}}
 {{--                                              onsubmit="return confirm('Delete this product?')">--}}
@@ -88,10 +88,10 @@
         // const order_raw = button.dataset.order;
         // const order = JSON.parse(order_raw);
 
-        function loadOrderDetailSub(order){
+        function loadOrderDetailSub(order_id){
 
             axios.post('/order/sub',{
-                order,
+                order_id,
             }).then(response => {
                 document.getElementById('order-details').innerHTML = response.data;
             }).catch(error => {
