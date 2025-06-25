@@ -13,7 +13,7 @@ class ProductImageSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 10; $i <= 20; $i++) {
             for ($j = 1; $j <= 4; $j++) {
                 ProductImage::create([
                     'product_id' => $i,

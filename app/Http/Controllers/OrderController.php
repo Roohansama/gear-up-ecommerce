@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +15,8 @@ class OrderController extends Controller
     {
         $orders = Order::with('orderItems')->get();
 
-//        dd($orders);
 
-        return view('admin.order.order', compact('orders'));
+        return view('admin.order.order', compact('orders', ));
     }
 
     public function showOrderSub(Request $request){
@@ -24,6 +24,7 @@ class OrderController extends Controller
         $id = $request->order_id; // cast to object for easier blade access
 
         $order_sub = Order::with('orderItems')->where('id', $id)->first();
+        $product_images = ProductImage::all()->groupBy('product_id')->toArray();
 
         $total = 0 ;
         foreach ($order_sub->orderItems as $item)
@@ -32,7 +33,7 @@ class OrderController extends Controller
             $total += $itemTotal;
         }
 
-        return view('admin.order.order-details-sub', compact('order_sub','total'))->render();
+        return view('admin.order.order-details-sub', compact('order_sub','total','product_images'))->render();
     }
 
     public function PlaceOrder(Request $request)

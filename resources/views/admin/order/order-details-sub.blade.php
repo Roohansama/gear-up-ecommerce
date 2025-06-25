@@ -1,7 +1,6 @@
 @if(isset($order_sub))
     <div class="flex flex-col space-y-4">
         <h1 class="text-xl font-semibold">Order #{{ $order_sub->order_number }}</h1>
-{{--        <p class="text-sm">Order Date: {{ $order_sub->created_at->format('F j, Y')  }}</p>--}}
         <div class="flex justify-between">
             <p class="text-gray-400 font-semibold">Payment</p>
             <p class="bg-green-500 text-white px-1.5 py-0.5 rounded">Completed</p>
@@ -27,16 +26,26 @@
             <p class="text-gray-400 font-semibold">Ship Date</p>
             <p>hmm</p>
         </div>
-
         <div class="flex flex-col space-y-3">
             <p class="text-gray-400 font-semibold">Order Notes</p>
-            <textarea name="description" id="" rows="5" class="bg-gray-100 resize-none p-3 rounded-lg" disabled>{{$order_sub->order_notes}}</textarea>
+            <textarea name="description" id="" rows="3" class="bg-gray-100 resize-none p-3 rounded-lg" disabled>{{$order_sub->order_notes}}</textarea>
         </div>
         <div class="min-h-0.5 min-w-full bg-gray-200"></div>
-        <div class="flex flex-col space-y-3 mt-4 mb-4 border-1 border-gray-200 p-3 rounded-lg">
+
+        <div class="flex flex-col space-y-3 mb-4 border-1 border-gray-200 p-3 rounded-lg min-h-64 max-h-64 overflow-scroll">
         @foreach($order_sub->orderItems as $item)
                 <div class="flex justify-between">
-                    <p class="font-semibold">{{ucfirst($item->product_name)}}</p>
+                    <div class="font-semibold flex space-x-2">
+                        <span class="text-gray-400">{{$loop->iteration}}</span>
+                        <span>
+                            @if($product_images)
+                                <img src="{{asset('storage/'.$product_images[$item->product_id][0]['image_path'])}}" alt="none" class="w-5 h-5 rounded-full">
+                            @endif
+                        </span>
+                        <span>
+                        {{ucfirst($item->product_name)}}
+                        </span>
+                    </div>
                     <p>{{$item->price}}
                     <span class="font-semibold">
                         {{'x'.$item->quantity}}
@@ -44,14 +53,11 @@
                 </div>
                 <div class="min-h-0.5 min-w-full bg-gray-200"></div>
         @endforeach
-            <div class="flex justify-between">
-                <p class=" font-semibold">Total</p>
-                <p class="font-semibold">{{$total}}/-</p>
-            </div>
         </div>
-
-
-        {{-- loop over $order->order_items if you have it --}}
+        <div class="flex justify-between border-1 border-gray-200 p-3 rounded-lg">
+            <p class=" font-semibold">Total</p>
+            <p class="font-semibold">{{$total}}/-</p>
+        </div>
     </div>
 @else
     <div class="flex justify-center items-center h-full">

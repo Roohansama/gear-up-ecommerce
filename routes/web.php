@@ -11,6 +11,7 @@ route::get('/csrf', function () {
     return csrf_token();
 });
 
+
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -25,7 +26,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
-Route::group(['middleware' => 'auth:web'], function () {
+//Route::group(['middleware' => 'auth:web'], function () {
     route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
@@ -48,7 +49,7 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/order/view/{id}', [OrderController::class, 'show'])->name('order.show');
     Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
 
-});
+//});
 
 //USER Routes
 

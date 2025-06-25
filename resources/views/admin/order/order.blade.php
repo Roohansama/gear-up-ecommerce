@@ -3,7 +3,7 @@
 @section('content')
     <div class="w-full container overflow-scroll mx-auto mt-5">
         <div class="flex flex-col-reverse px-2 md:px-0 md:flex-row space-y-2 md:space-y-0 md:space-x-2">
-            <div class="w-full md:w-4/6 border-1 border-gray-300 shadow-md rounded-lg p-2" id="order-list">
+            <div class="w-full md:w-4/6 min-h-[82vh] border-1 border-gray-300 shadow-md rounded-lg p-2" id="order-list">
                 <div class="flex justify-between items-center mb-6">
                     <h1 class="text-2xl font-bold text-gray-800">Orders</h1>
                     <button disabled
@@ -51,10 +51,14 @@
                                         {{ ucfirst($order->order_status) }}
                                     </span>
                                     </td>
-                                    <td class="px-6 py-4 text-sm space-x-2">
+                                    <td class="flex px-6 py-4 text-sm space-x-4">
                                         <button
                                            class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order->id}})">Open</button>
-{{--                                        <form method="POST" action="{{route('order.delete',$order->id)}}"--}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 cursor-pointer">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                        </svg>
+
+                                        {{--                                        <form method="POST" action="{{route('order.delete',$order->id)}}"--}}
 {{--                                              class="inline-block"--}}
 {{--                                              onsubmit="return confirm('Delete this product?')">--}}
 {{--                                            @csrf--}}
@@ -76,7 +80,7 @@
                     </table>
                 </div>
             </div>
-            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg p-2" id="order-details">
+            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg p-2 max-h-[82vh]" id="order-details">
                 @include('admin.order.order-details-sub')
             </div>
         </div>
@@ -97,7 +101,6 @@
             }).catch(error => {
                 console.error('Failed to load order details:', error);
             })
-
         }
     </script>
 

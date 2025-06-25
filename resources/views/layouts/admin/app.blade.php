@@ -12,7 +12,7 @@
 <body class=" text-gray-900">
 @include('layouts.admin.header')
 
-<main class="flex h-screen">
+<main class="flex min-h-[86.5vh]">
     @include('layouts.admin.sidebar')
     @yield('content')
 </main>
