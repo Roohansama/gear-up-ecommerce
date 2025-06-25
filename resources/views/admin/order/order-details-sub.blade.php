@@ -32,7 +32,7 @@
         </div>
         <div class="min-h-0.5 min-w-full bg-gray-200"></div>
 
-        <div class="flex flex-col space-y-3 mb-4 border-1 border-gray-200 p-3 rounded-lg min-h-64 max-h-64 overflow-scroll">
+        <div class="flex flex-col space-y-3 mb-4 border-1 border-gray-200 p-3 rounded-lg md:min-h-64 max-h-64 overflow-scroll">
         @foreach($order_sub->orderItems as $item)
                 <div class="flex justify-between">
                     <div class="font-semibold flex space-x-2">

@@ -80,7 +80,7 @@
                     </table>
                 </div>
             </div>
-            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg p-2 max-h-[82vh]" id="order-details">
+            <div class="w-full md:w-2/6 border-1 border-gray-300 shadow-md rounded-lg p-2 max-h-[82vh] overflow-scroll md:overflow-hidden" id="order-details">
                 @include('admin.order.order-details-sub')
             </div>
         </div>
