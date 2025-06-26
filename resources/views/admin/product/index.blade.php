@@ -29,7 +29,7 @@
                     <tr>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image"
+                            <img src="{{ asset('storage/' . $images[$product->id][0]['image_path']) }}" alt="Product Image"
                                  class="w-20 h-20 object-cover">
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">

@@ -14,7 +14,9 @@ class ProductController extends Controller
         $products = Product::LeftJoin('categories', 'products.category_id', '=', 'categories.id')
             ->select('products.*', 'categories.name as category_name')
             ->get();
-        return view('admin.product.index', compact('products'));
+
+        $images = ProductImage::all()->groupBy('product_id')->toArray();
+        return view('admin.product.index', compact('products', 'images'));
     }
     public function showProductForm($id = null){
         $categories = Category::all();
