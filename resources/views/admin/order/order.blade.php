@@ -33,14 +33,6 @@
                                         {{ $order->order_number ?? '-' }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-700">{{ $order->first_name.' '.$order->last_name }}</td>
-                                    @php
-                                        $total = 0 ;
-                                        foreach ($order->orderItems as $item)
-                                            {
-                                               $itemTotal = $item->price * $item->quantity;
-                                               $total += $itemTotal;
-                                            }
-                                    @endphp
                                     <td class="px-6 py-4 text-sm text-gray-700 font-semibold">{{$total}}/-</td>
                                     <td class="px-6 py-4 text-sm text-gray-700">{{$order->created_at->format('F j, Y') }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-700">
@@ -54,7 +46,7 @@
                                     <td class="flex px-6 py-4 text-sm space-x-4">
                                         <button
                                            class="text-blue-500 hover:underline cursor-pointer" onclick="loadOrderDetailSub({{$order->id}})">Open</button>
-                                        <a href="{{route('order.show', $order->id)}}">
+                                        <a href="{{route('order.show', $order->id)}}" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 cursor-pointer">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                                             </svg>
@@ -91,18 +83,22 @@
 
 @push('scripts')
     <script>
-        // const order_raw = button.dataset.order;
-        // const order = JSON.parse(order_raw);
+        const OrderDetailsDiv = document.getElementById('order-details');
+        const EmptyOrderSubCache = OrderDetailsDiv.innerHTML;
 
-        function loadOrderDetailSub(order_id){
+        function loadOrderDetailSub(order_id) {
 
-            axios.post('/order/sub',{
+            axios.post('/order/sub', {
                 order_id,
             }).then(response => {
                 document.getElementById('order-details').innerHTML = response.data;
             }).catch(error => {
                 console.error('Failed to load order details:', error);
             })
+        }
+
+        function removeOrderSub() {
+            OrderDetailsDiv.innerHTML = EmptyOrderSubCache;
         }
     </script>
 

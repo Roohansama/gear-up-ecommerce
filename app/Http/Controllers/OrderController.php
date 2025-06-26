@@ -15,15 +15,24 @@ class OrderController extends Controller
     {
         $orders = Order::with('orderItems')->get();
 
-        return view('admin.order.order', compact('orders', ));
+        $total = 0;
+        foreach ($orders as $order) {
+            foreach ($order->orderItems as $item) {
+                $itemTotal = $item->price * $item->quantity;
+                $total += $itemTotal;
+            }
+        }
+
+
+        return view('admin.order.order', compact('orders', 'total'));
     }
 
-    public function showOrder($id){
+    public function showOrder($id)
+    {
         $order = Order::with('orderItems')->where('id', $id)->first();
 
-        $total = 0 ;
-        foreach ($order->orderItems as $item)
-        {
+        $total = 0;
+        foreach ($order->orderItems as $item) {
             $itemTotal = $item->price * $item->quantity;
             $total += $itemTotal;
         }
@@ -32,21 +41,25 @@ class OrderController extends Controller
 
     }
 
-    public function showOrderSub(Request $request){
+    public function showOrderSub(Request $request)
+    {
 
         $id = $request->order_id; // cast to object for easier blade access
 
         $order_sub = Order::with('orderItems')->where('id', $id)->first();
         $product_images = ProductImage::all()->groupBy('product_id')->toArray();
 
-        $total = 0 ;
-        foreach ($order_sub->orderItems as $item)
-        {
+        $total = 0;
+        foreach ($order_sub->orderItems as $item) {
             $itemTotal = $item->price * $item->quantity;
             $total += $itemTotal;
         }
 
-        return view('admin.order.order-details-sub', compact('order_sub','total','product_images'))->render();
+        return view('admin.order.order-details-sub', compact('order_sub', 'total', 'product_images'))->render();
+    }
+
+    public function removeOrderSub(){
+        return view('admin.order.order-details-sub')->render();
     }
 
     public function PlaceOrder(Request $request)
