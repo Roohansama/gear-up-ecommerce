@@ -20,15 +20,15 @@ class OrderController extends Controller
 
     public function showOrder($id){
         $order = Order::with('orderItems')->where('id', $id)->first();
-        $product_ids = [];
+
+        $total = 0 ;
         foreach ($order->orderItems as $item)
         {
-            $product_ids[] = $item->product_id;
+            $itemTotal = $item->price * $item->quantity;
+            $total += $itemTotal;
         }
 
-        $product_images = ProductImage::where('product_id', $product_ids)->get()->toArray();
-
-        return view('admin.order.order-details', compact('order','product_images'));
+        return view('admin.order.order-details', compact('order', 'total'));
 
     }
 
