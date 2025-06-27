@@ -18,10 +18,12 @@ class CartNotificationEvent implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public $data;
-    public function __construct($cart)
+    public $data, $index;
+    public function __construct($cart, $index)
     {
-        $this->data = $cart;
+        $this->data =  $cart;
+        $this->index = $index;
+//        $this->check = is_array($this->data);
     }
 
     /**

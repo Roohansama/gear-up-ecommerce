@@ -51,23 +51,13 @@
                         Add to Cart
                     </button>
                 </div>
-
         </div>
         @else
             <h1>Product not found</h1>
         @endif
-
     </div>
 @endsection
 @push('scripts')
-    <script type="module">
-           Echo.channel('orders')
-                .listen('CartNotificationEvent', (e) => {
-                    console.log('Received event in blade:', e);
-                });
-    </script>
-
-
     <script>
 
         function addToCart(productId) {
@@ -78,12 +68,11 @@
                 .then(response => {
                     // alert(response.data.message);
                     // You can update cart UI here
-                    console.log(response.data.cart);
+                    // console.log(response.data.cart);
                 })
                 .catch(error => {
                     console.error('Error adding to cart:', error);
                 });
         }
     </script>
-
 @endpush

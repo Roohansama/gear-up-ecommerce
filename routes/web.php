@@ -12,11 +12,6 @@ route::get('/csrf', function () {
     return csrf_token();
 });
 
-Route::get('/broadcast', function () {
-    broadcast(new CartNotificationEvent('test order'))->toOthers();
-    return 'Event broadcasted';
-});
-
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -67,6 +62,7 @@ Route::post('/cart/add', [StoreController::class, 'addToCart'])->name('store.car
 Route::post('/cart/update', [StoreController::class, 'updateCart'])->name('store.cart.update');
 Route::get('/cart/partial', [StoreController::class, 'getCartPartial'])->name('store.cart.partial');
 Route::post('/cart/remove-item', [StoreController::class, 'removeItem'])->name('store.cart.remove-item');
+Route::post('/cart/modal', [storeController::class, 'showCartModal'])->name('store.cart.modal');
 
 //show checkout
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout');

@@ -84,7 +84,7 @@ class StoreController extends Controller
             ];
         }
 
-        broadcast(new CartNotificationEvent($cart));
+        broadcast(new CartNotificationEvent($cart,$productId));
 
         $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
         session()->put('cart', $cart);
@@ -160,6 +160,23 @@ class StoreController extends Controller
         $total = session()->get('total');
 //        dd($total);
         return view('store.checkout', ['cart' => $cart, 'total' => $total]);
+    }
+
+    public function showCartModal(Request $request){
+
+        try{
+            $data = $request->input('data');
+
+//            return $data;
+
+//            return view ('store.partials.empty-cart')->render();
+            return view('store.partials.header-cart-button', compact('data'))->render();
+
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+
     }
 
 }

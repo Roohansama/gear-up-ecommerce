@@ -90,7 +90,3 @@
         </svg>
     </div>
 @endif
-
-<script>
-
-</script>
