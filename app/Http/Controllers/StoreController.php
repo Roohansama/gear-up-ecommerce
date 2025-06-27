@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CartNotificationEvent;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -82,6 +83,8 @@ class StoreController extends Controller
                 'quantity' => $quantity
             ];
         }
+
+        broadcast(new CartNotificationEvent($cart));
 
         $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
         session()->put('cart', $cart);

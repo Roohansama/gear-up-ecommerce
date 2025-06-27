@@ -85,12 +85,19 @@
     <script>
         const OrderDetailsDiv = document.getElementById('order-details');
         const EmptyOrderSubCache = OrderDetailsDiv.innerHTML;
+        const OrderSubCache = {};
 
         function loadOrderDetailSub(order_id) {
+
+            if(OrderSubCache[order_id]) {
+                OrderDetailsDiv.innerHTML = OrderSubCache[order_id];
+                return;
+            }
 
             axios.post('/order/sub', {
                 order_id,
             }).then(response => {
+                OrderSubCache[order_id] = response.data;
                 document.getElementById('order-details').innerHTML = response.data;
             }).catch(error => {
                 console.error('Failed to load order details:', error);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CartNotificationEvent;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductImage;

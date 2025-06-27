@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\CartNotificationEvent;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,10 @@ route::get('/csrf', function () {
     return csrf_token();
 });
 
+Route::get('/broadcast', function () {
+    broadcast(new CartNotificationEvent('test order'))->toOthers();
+    return 'Event broadcasted';
+});
 
 Route::get('/login', function () {
     return view('auth.login');
