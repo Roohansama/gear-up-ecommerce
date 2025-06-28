@@ -49,8 +49,13 @@
     <script>
         const cartModal = document.getElementById('cart-modal');
 
+        window.addEventListener('click', ()=>{
+            cartModal.classList.add('hidden');
+        });
+
+        var timeoutId = null;
+
         function getCartModal(data) {
-            console.log(data);
             axios.post('/cart/modal',{
                 data,
             })
@@ -58,10 +63,25 @@
                     // console.log(response.data);
                     cartModal.innerHTML = response.data;
                     cartModal.classList.remove('hidden');
+                    timeoutId = setTimeout(() => {
+                        cartModal.classList.add('hidden');
+                    },3000);
+                    console.log(timeoutId);
                 })
                 .catch(error => {
                     console.log(error);
                 })
+
+            cartModal.addEventListener('mouseover', () => {
+                clearTimeout(timeoutId);
+                console.log('mouseover');
+            })
+            cartModal.addEventListener('mouseout', () => {
+                timeoutId = setTimeout(() => {
+                    cartModal.classList.add('hidden');
+                },3000);
+                console.log('mouseout');
+            })
         }
     </script>
 

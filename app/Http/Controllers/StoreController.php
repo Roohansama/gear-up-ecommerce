@@ -167,13 +167,13 @@ class StoreController extends Controller
         try{
             $data = $request->input('data');
 
-//            return $data;
-
-//            return view ('store.partials.empty-cart')->render();
             return view('store.partials.header-cart-button', compact('data'))->render();
 
         }catch(\Exception $e){
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
         }
 
 
