@@ -46,7 +46,7 @@
                         {!! $product->description !!}
                     </div>
                     <!-- Add to Cart / Buy Buttons -->
-                    <button onclick="addToCart({{$product->id}})"
+                    <button onclick="addToCart({{$product->id}})" type="button"
                             class="text-white px-6 py-2 rounded bg-amber-400 hover:bg-amber-500 mb-5 cursor-pointer">
                         Add to Cart
                     </button>

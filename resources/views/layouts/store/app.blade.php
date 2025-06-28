@@ -13,7 +13,7 @@
 <body class="text-gray-900 font-light">
 @include('layouts.store.header')
 
-<main class="flex min-h-[84vh] font-roboto mb-5">
+<main class="flex min-h-[84vh] font-roboto mb-5" id="main">
     @yield('content')
 </main>
 

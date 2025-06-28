@@ -49,7 +49,13 @@
     <script>
         const cartModal = document.getElementById('cart-modal');
 
-        window.addEventListener('click', ()=>{
+        const mainDiv = document.getElementById('main');
+
+        mainDiv.addEventListener('click', (e)=>{
+            if (cartModal.contains(e.target)) {
+                // Click is inside the excluded area, do nothing
+                return;
+            }
             cartModal.classList.add('hidden');
         });
 
