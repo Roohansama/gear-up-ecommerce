@@ -1,7 +1,6 @@
 @extends('layouts.store.app')
 
 @section('content')
-
     <div class="container mx-auto w-full">
         <div id="cart-loading-overlay" class="hidden absolute inset-0 bg-white/60 z-50 flex items-center justify-center">
             <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 animate-spin border-t-blue-500"></div>

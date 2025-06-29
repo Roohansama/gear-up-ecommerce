@@ -12,6 +12,12 @@ route::get('/csrf', function () {
     return csrf_token();
 });
 
+route::get('/button', function () {
+    $data = session()->get('cart');
+//    dd($data);
+    return view('store.partials.mini-cart-items', compact('data'));
+});
+
 Route::get('/login', function () {
     return view('auth.login');
 });
