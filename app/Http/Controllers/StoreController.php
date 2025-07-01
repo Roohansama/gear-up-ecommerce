@@ -162,31 +162,15 @@ class StoreController extends Controller
         return view('store.checkout', ['cart' => $cart, 'total' => $total]);
     }
 
-    public function showCartModal(Request $request){
+    public function showCartModal(){
         $cart_data = session('cart', []);
-        $total = collect($cart_data)->sum(fn($item) => $item['price'] * $item['quantity']);
-        session()->put('total', $total);
+        $total = session('total', []);
 
         if(count($cart_data) == 0){
-            session()->forget('cart');
-            session()->forget('total');
-            return view('store.partials.mini-empty-cart');
+            return view('store.partials.mini-empty-cart')->render();
         }else{
-            return view('store.partials.mini-cart-items', compact('cart_data', 'total'));
+            return view('store.mini-cart', compact('cart_data', 'total'))->render();
         }
     }
-//        try{
-//            $data = $request->input('data');
-//
-//            return view('store.partials.mini-cart-modal', compact('data'))->render();
-//
-//        }catch(\Exception $e){
-//            return response()->json([
-//                'success' => false,
-//                'error' => $e->getMessage()
-//            ], 500);
-//        }
-//
-//    }
 
 }

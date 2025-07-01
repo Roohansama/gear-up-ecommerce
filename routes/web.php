@@ -13,9 +13,9 @@ route::get('/csrf', function () {
 });
 
 route::get('/button', function () {
-    $data = session()->get('cart');
+    $cart_data = session()->get('cart');
 //    dd($data);
-    return view('store.partials.mini-cart-items', compact('data'));
+    return view('store.mini-cart', compact('cart_data'));
 });
 
 Route::get('/login', function () {
