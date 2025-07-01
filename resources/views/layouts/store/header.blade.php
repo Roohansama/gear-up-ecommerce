@@ -63,12 +63,15 @@
         });
 
         cartIcon.addEventListener('mouseover', () => {
+            clearTimeout(timeoutId);
             cartModal.classList.remove('hidden');
+
         });
         cartIcon.addEventListener('mouseout', () => {
             timeoutId = setTimeout( () => {
                 cartModal.classList.add('hidden');
-            },2000);
+            },3000);
+
         });
 
 
