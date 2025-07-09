@@ -10,10 +10,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body class="text-gray-900 font-light">
+<body class="text-gray-900 font-light ">
 @include('layouts.store.header')
 
-<main class="flex min-h-[84vh] font-roboto mb-5" id="main">
+<main class="flex min-h-[84vh] mb-5" id="main">
     @yield('content')
 </main>
 

@@ -10,7 +10,7 @@
 
             <!-- Product Grid -->
             <div class="w-full md:w-9/12">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 leading-none">
                     @if(isset($products))
                         @foreach ($products as $product)
                             <a href="{{route('product.show',$product->slug)}}">
@@ -18,8 +18,8 @@
                                     <img src="{{ asset('storage/' . $images[$product->id][0]['image_path']) }}"
                                          alt="{{ $product->name }}"
                                          class="w-full h-40 object-fit mb-3 rounded-md">
-                                    <p class=" text-base mb-1 truncate">{{ $product->name }}</p>
-                                    <div class="flex flex-row font-semibold mb-4"><span
+                                    <p class=" mb-1 text-center ">{{ $product->name }}</p>
+                                    <div class="flex flex-row font-[500] mb-4 justify-center"><span
                                             class="flex text-md align-top">Rs</span><span
                                             class="text-md">{{number_format($product->price)  }}</span></div>
                                 </div>
