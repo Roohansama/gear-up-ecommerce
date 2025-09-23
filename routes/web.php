@@ -2,6 +2,7 @@
 
 use App\Events\CartNotificationEvent;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -55,6 +56,13 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('order/sub/remove', [OrderController::class, 'removeOrderSub'])->name('order.sub.remove');
     Route::get('/order/view/{id}', [OrderController::class, 'showOrder'])->name('order.show');
     Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+
+//payment routes
+Route::get('/payments', [PaymentController::class, 'index'])->name('payment.index');
+//Route::post('/order/sub', [OrderController::class, 'showOrderSub'])->name('order.sub');
+//Route::post('order/sub/remove', [OrderController::class, 'removeOrderSub'])->name('order.sub.remove');
+//Route::get('/order/view/{id}', [OrderController::class, 'showOrder'])->name('order.show');
+//Route::post('/order/delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
 
 //});
 
