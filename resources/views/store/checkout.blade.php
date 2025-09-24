@@ -105,10 +105,22 @@
                     </div>
                     <div class="min-h-1 bg-gray-200"></div>
 
+                    <div class="flex" id="card-element">
+
+                    </div>
+
                     <button type="submit" form="checkout_form" class="bg-amber-300 uppercase text-lg text-white py-2 px-3 mt-5 hover:bg-amber-400 cursor-pointer">Place Order</button>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
+@push('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{env('STRIPE_PUBLISHABLE')}}');
+        var elements = stripe.elements();
+        var card = elements.create('card');
+        card.mount('#card-element');
+    </script>
+@endpush

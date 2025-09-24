@@ -79,6 +79,6 @@ Route::post('/cart/remove-item', [StoreController::class, 'removeItem'])->name('
 Route::post('/cart/modal', [storeController::class, 'showCartModal'])->name('store.cart.modal');
 
 //show checkout
-Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout');
+Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout')->middleware(\App\Http\Middleware\ContentSecurityPolicyMiddleware::class);
 //post checkout
 Route::post('/checkout', [OrderController::class, 'placeOrder'])->name('store.place-order');

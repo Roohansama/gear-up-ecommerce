@@ -9,6 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/echo.js'])
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
 </head>
 <body class="text-gray-900 font-light ">
 @include('layouts.store.header')
@@ -21,6 +22,8 @@
 </body>
 @stack('scripts')
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
 <script>
     axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
 </script>
