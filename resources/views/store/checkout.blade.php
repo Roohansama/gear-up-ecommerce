@@ -5,7 +5,7 @@
         <div class="container mx-auto flex flex-col md:flex-row">
             <div class="flex flex-col w-full space-y-5 md:w-3/5 py-5 md:py-10 px-3 md:px-0">
                 <h1 class="uppercase text-2xl font-semibold">billing details</h1>
-                <form action="{{route('store.place-order')}}" id="checkout_form" method="post" class="space-y-5">
+{{--                <form action="{{route('store.place-order')}}" id="checkout_form" method="post" class="space-y-5">--}}
                     @csrf
                     <div class="flex flex-row w-full space-x-8">
                         <div class="flex flex-col w-1/2 space-y-2">
@@ -73,7 +73,7 @@
                             <textarea name="order_notes" id="" rows="10" class="border-1 border-gray-300 w-full resize-none"></textarea>
                         </div>
                     </div>
-                </form>
+{{--                </form>--}}
             </div>
             <div class="flex flex-col w-full md:w-2/5 py-5 md:py-10 px-3 md:pl-10">
                 <div class="flex flex-col w-full border-2 h-1/2 p-7">
@@ -103,13 +103,20 @@
                         <h1>Total</h1>
                         <h1 class="font-semibold">{{$total ?? 'N/A'}}</h1>
                     </div>
-                    <div class="min-h-1 bg-gray-200"></div>
+                    <div class="min-h-1 bg-gray-200 my-3"></div>
 
-                    <div class="flex" id="card-element">
+                    <form action="{{route('store.charge')}}" method="post" id="charge-form">
+                        @csrf
+                        <input type="hidden" name="stripeToken" id="stripe-token">
+                        <input type="hidden" name="amount" id="charge-value" value="{{$total}}">
 
-                    </div>
+                        <div id="card-element">
+                        </div>
 
-                    <button type="submit" form="checkout_form" class="bg-amber-300 uppercase text-lg text-white py-2 px-3 mt-5 hover:bg-amber-400 cursor-pointer">Place Order</button>
+                        <div class="min-h-1 bg-gray-200 my-2"></div>
+
+                        <button type="submit" onclick="createToken()" form="checkout_form" class="bg-amber-300 uppercase text-lg text-white py-2 px-3 mt-5 hover:bg-amber-400 cursor-pointer">Place Order</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -122,5 +129,15 @@
         var elements = stripe.elements();
         var card = elements.create('card');
         card.mount('#card-element');
+
+        function createToken(){
+            stripe.createToken(card).then(function(result){
+                console.log(result);
+                if(result.token){
+                    document.getElementById('stripe-token').value = result.token.id;
+                    document.getElementById('charge-form').submit();
+                }
+            })
+        }
     </script>
 @endpush

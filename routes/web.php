@@ -4,6 +4,7 @@ use App\Events\CartNotificationEvent;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -82,3 +83,6 @@ Route::post('/cart/modal', [storeController::class, 'showCartModal'])->name('sto
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('store.checkout')->middleware(\App\Http\Middleware\ContentSecurityPolicyMiddleware::class);
 //post checkout
 Route::post('/checkout', [OrderController::class, 'placeOrder'])->name('store.place-order');
+
+//post stripe
+Route::post('/charge', [StripeController::class, 'placeCharge'])->name('store.charge');

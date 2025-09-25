@@ -99,6 +99,8 @@ class OrderController extends Controller
                 ]);
             }
 
+
+
             flash()->success('Order Placed successfully!');
 
             session()->forget('cart');
